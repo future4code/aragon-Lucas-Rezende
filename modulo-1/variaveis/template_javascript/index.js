@@ -53,6 +53,13 @@ voceTomouCafe = prompt("você tomou café?");
 voceLanchou = prompt("você lanchou?");
 voceAlmocou = prompt("você almoçou?");
 
+console.log("você tomou café?");
+console.log(voceTomouCafe);
+console.log("você lanchou?");
+console.log(voceLanchou);
+console.log("você almoçou?");
+console.log(voceAlmocou);
+
 let a = 10;
 let b = 25;
 let c;
