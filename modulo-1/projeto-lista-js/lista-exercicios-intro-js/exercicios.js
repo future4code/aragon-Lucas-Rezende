@@ -33,19 +33,20 @@ function imprimeIdade() {
 }
 
 // EXERCÍCIO 03
-function calculaIMC() {
+function calculaIMC(pesoKg, alturaM) {
   // implemente sua lógica aqui
-  const pesoKg = Number(prompt("qual o seu peso em kg?"));
-  const alturaM = Number(prompt("qual a sua altura em metros?"));
   return pesoKg / (alturaM * alturaM);
 }
 
 // EXERCÍCIO 04
-function imprimeInformacoesUsuario(nome, idade, email) {
+function imprimeInformacoesUsuario() {
   // implemente sua lógica aqui
   // "Meu nome é NOME, tenho IDADE anos, e o meu email é EMAIL."
+  const nome = prompt("aaa?");
+  const idade = Number(prompt("bbb?"));
+  const email = prompt("ccc?");
   console.log(
-    `Meu nome é ${nome}, tenho ${idade} anos, e o meu email é ${email}.`
+    `Meu nome é  ${nome}, tenho ${idade} anos, e o meu email é ${email}.`
   );
 }
 
@@ -91,7 +92,13 @@ function retornaUltimoElemento(array) {
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
-  return [array.pop(), array[0]];
+  const removePItem = array;
+  const itemR = array.shift();
+  const ultimoR = array.pop();
+  const aa = [itemR];
+  const bb = [ultimoR];
+
+  return bb.concat(array, aa);
 }
 
 // EXERCÍCIO 12
@@ -107,8 +114,12 @@ function checaRenovacaoRG() {
   const anoDeNascimento = prompt("ano nascimento");
   const anoDeEmissaoIdent = prompt("ano emissão RG");
   const minnhaIdade = anoAtual - anoDeNascimento;
-  const aQuantosAnosEmiti = anoAtual - anoDeEmissaoIdent;
-  console.log(minnhaIdade <= 20 || minnhaIdade > 20 <= 50 || minnhaIdade >= 50);
+  const diferença = anoAtual - anoDeEmissaoIdent;
+  const aa = minnhaIdade <= 20 && diferença >= 5;
+  const bb = minnhaIdade <= 50 && minnhaIdade > 20 && diferença >= 10;
+  const cc = minnhaIdade > 50 && diferença >= 15;
+
+  console.log(aa || bb || cc);
 }
 
 // EXERCÍCIO 14
@@ -117,12 +128,20 @@ function checaAnoBissexto(ano) {
   const div4 = ano % 4;
   const div400 = ano % 400;
   const div100 = ano % 100;
-  const A = div4 + div400;
-  const B = div100 + div4 + div400;
-  return A === 0 && B != 0;
+  const A = div4 == 0 && div100 != 0;
+  return A || div400 == 0;
 }
 
 // EXERCÍCIO 15
 function checaValidadeInscricaoLabenu() {
   // implemente sua lógica aqui
+  const isMaoirDe18 = prompt("aa?");
+  const possuiEnsinoMedio = prompt("bb?");
+  const possuiDisponibilidade = prompt("cc?");
+
+  console.log(
+    isMaoirDe18 === "sim" &&
+      possuiEnsinoMedio === "sim" &&
+      possuiDisponibilidade === "sim"
+  );
 }
