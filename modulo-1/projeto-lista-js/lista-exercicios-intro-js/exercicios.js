@@ -46,7 +46,7 @@ function imprimeInformacoesUsuario() {
   const idade = Number(prompt("bbb?"));
   const email = prompt("ccc?");
   console.log(
-    `Meu nome é  ${nome}, tenho ${idade} anos, e o meu email é ${email}.`
+    `Meu nome é ${nome}, tenho ${idade} anos, e o meu email é ${email}.`
   );
 }
 
