@@ -43,23 +43,20 @@
 //a)
 
 function sobreMim() {
-  return `Eu sou lucas, tenho 32 anos, moro em uberlândia e sou programador.`;
+  console.log(
+    `Eu sou lucas, tenho 32 anos, moro em uberlândia e sou programador.`
+  );
 }
 
-console.log(sobreMim());
+sobreMim();
 
 //b)
 
-const nome = prompt("qual o seu nome?");
-const idade = prompt("qual a sua idade?");
-const cidade = prompt("qual a sua cidade");
-const profissao = prompt("qual a sua profissão?");
-
-function mensagemSobreMim(texto) {
+function mensagemSobreMim(nome, idade, cidade, profissao) {
   return `Olá eu sou o ${nome}, tenho ${idade} anos, moro em ${cidade} e sou ${profissao}.`;
 }
 
-console.log(mensagemSobreMim());
+console.log(mensagemSobreMim("lucas", 32, "uberlandia", "programador"));
 
 // exercício 2
 
@@ -155,11 +152,11 @@ console.log(`${valor(10)}, ${recebeValor2(4, 5)}.`);
 
 //exercício 2
 
-const cateto1 = Math.pow(2, 2);
-const cateto2 = Math.pow(4, 2);
-
-function pitagoras(cateto1, cateto2) {
-  return Math.pow(cateto1 + cateto2, 0.5);
+function pitagoras(a, b) {
+  const catetosAoQuadrado = Math.pow(a, 2) + Math.pow(b, 2);
+  const hipotenusa = Math.pow(catetosAoQuadrado, 0.5);
+  return hipotenusa;
 }
 
-console.log(`o valor da hipotenusa é = ${pitagoras(cateto1, cateto2)}`);
+const resultadoHipotenusa = pitagoras(2, 4);
+console.log(`Hipotenusa = ${resultadoHipotenusa}`);
