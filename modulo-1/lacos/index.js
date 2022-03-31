@@ -115,20 +115,21 @@ for (let i = 0; i < array2.length; i++) {
 
 //e)
 
-// const array3 = [1, 5, 10, 15, 20, 25, 30];
-// let menorNumero = 0;
-// let maiorNumero = 0;
+const array3 = [1, 5, 10, 15, 20, 25, 30];
+let i = 0;
+let itemAFrente = array3.indexOf(i + 1);
+let posicaoAFrente = array3[itemAFrente];
+let menorNumero = 0;
+let maiorNumero = 0;
 
-// for (let i = 0; i < array3.length; i++) {
-//   let posicaoAtualArray = array3[i];
+for (let i = 0; i < array3.length; i++) {
+  let posicaoAtualArray = array3[i];
 
-//   if (posicaoAtualArray >= menorNumero) {
-//     menorNumero = posicaoAtualArray;
-//   } else posicaoAtualArray >= maiorNumero;
-//   {
-//     maiorNumero = posicaoAtualArray;
-//   }
-//   console.log(
-//     `O menor número do array é ${menorNumero} e o maior é ${maiorNumero}`
-//   );
-// }
+  if (posicaoAtualArray <= posicaoAFrente) {
+    menorNumero = posicaoAtualArray;
+  } else posicaoAtualArray >= posicaoAFrente;
+  maiorNumero = posicaoAtualArray;
+}
+console.log(
+  `O menor número do array é ${menorNumero} e o maior é ${maiorNumero}`
+);
