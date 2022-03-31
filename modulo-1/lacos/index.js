@@ -57,61 +57,78 @@ por linha até o total de vezes digitado no prompt"
 
 // exercício 1
 
-// let quantosPet = Number(prompt("quantos pets você têm?"));
-// let condicao = quantosPet === 0;
-// let condicao2 = quantosPet > 0;
-// let bichinho = [];
+let quantosPet = Number(prompt("quantos pets você têm?"));
+let condicao = quantosPet === 0;
+let condicao2 = quantosPet > 0;
+let bichinho = [];
 
-// if (condicao) {
-//   console.log("que pena! você pode adotar um pet!");
-// } else if (condicao2) {
-//   for (let i = 0; i < quantosPet; i++)
-//     bichinho.push(prompt("qual o nome de seu ou seus pets?"));
-// }
+if (condicao) {
+  console.log("que pena! você pode adotar um pet!");
+} else if (condicao2) {
+  for (let i = 0; i < quantosPet; i++)
+    bichinho.push(prompt("qual o nome de seu ou seus pets?"));
+}
 
-// console.log(bichinho);
+console.log(bichinho);
 
 // exercicio 2
 
 // a)
 
-// let array = [1, 5, 10, 15, 20, 25, 30];
+let array = [1, 5, 10, 15, 20, 25, 30];
 
-// for (let i = 0; i < array.length; i++) {
-//   const index = array[i];
-//   console.log(index);
-// }
+for (let i = 0; i < array.length; i++) {
+  const index = array[i];
+  console.log(index);
+}
 
 //b)
 
-// let array = [1, 5, 10, 15, 20, 25, 30];
+let array0 = [1, 5, 10, 15, 20, 25, 30];
 
-// for (let i = 0; i < array.length; i++) {
-//   const index = array[i];
-//   console.log(index / 2);
-// }
+for (let i = 0; i < array0.length; i++) {
+  const index = array[i];
+  console.log(index / 2);
+}
 
 //c)
 
-// let array = [1, 5, 10, 15, 20, 25, 30];
-// let arrayPares = [];
+let array1 = [1, 5, 10, 15, 20, 25, 30];
+let arrayPares = [];
 
-// for (let i = 0; i < array.length; i++) {
-//   if (array[i] % 2 == 0) {
-//     arrayPares.push(array[i]);
-//   }
-// }
+for (let i = 0; i < array1.length; i++) {
+  if (array1[i] % 2 == 0) {
+    arrayPares.push(array1[i]);
+  }
+}
 
-// console.log(arrayPares);
+console.log(arrayPares);
 
 //d)
 
-// let array = [1, 5, 10, 15, 20, 25, 30];
-// let arrayPares = [];
+let array2 = [1, 5, 10, 15, 20, 25, 30];
 
-// for (let i = 0; i < array.length; i++) {
-//   const index = array[i];
-//   console.log(`o elemento do index ${i} é ${index}`);
-// }
+for (let i = 0; i < array2.length; i++) {
+  const index = array2[i];
+  console.log(`o elemento do index ${i} é ${index}`);
+}
 
 //e)
+
+// const array3 = [1, 5, 10, 15, 20, 25, 30];
+// let menorNumero = 0;
+// let maiorNumero = 0;
+
+// for (let i = 0; i < array3.length; i++) {
+//   let posicaoAtualArray = array3[i];
+
+//   if (posicaoAtualArray >= menorNumero) {
+//     menorNumero = posicaoAtualArray;
+//   } else posicaoAtualArray >= maiorNumero;
+//   {
+//     maiorNumero = posicaoAtualArray;
+//   }
+//   console.log(
+//     `O menor número do array é ${menorNumero} e o maior é ${maiorNumero}`
+//   );
+// }
