@@ -1,0 +1,82 @@
+.cabecalho {
+  background-color: rgb(181, 71, 71);
+  padding: 5px;
+  margin: 10px;
+  color: white;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+.cabecalho-funcionarios {
+  background-color: rgb(181, 71, 71);
+  padding: 5px;
+  margin: 10px;
+  color: white;
+  margin: 0;
+}
+
+.cabecalho-estoque {
+  background-color: rgb(181, 71, 71);
+  padding: 5px;
+  margin: 10px;
+  color: white;
+  margin: 0;
+}
+
+.cabecalho-add-produtos {
+  background-color: rgb(181, 71, 71);
+  padding: 5px;
+  margin: 10px;
+  color: white;
+  margin: 0;
+}
+
+.cabecalho-carrinho {
+  background-color: rgb(181, 71, 71);
+  padding: 5px;
+  margin: 10px;
+  color: white;
+  margin: 0;
+}
+
+footer {
+  background-color: rgb(73, 73, 243);
+  color: white 12px;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.rodape-fonte {
+  color: white;
+}
+
+button {
+  margin: 5px;
+}
+label {
+  display: inline-block;
+  width: 150px;
+  padding: 5px;
+}
+
+td {
+  background-color: rgb(242, 234, 234);
+  text-align: center;
+}
+
+.sobre-nos {
+  margin: 20px;
+}
+
+.botoes {
+  margin: 15px;
+}
+
+.redes {
+  margin: 20px;
+}
