@@ -124,6 +124,10 @@ td button {
   background-color: #635a3d;
 }
 
-.container-do-search {
-  margin-top: 10px;
+button:hover {
+  background-color: #635a3d;
+}
+
+button:active {
+  color: white;
 }
