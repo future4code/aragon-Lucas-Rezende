@@ -43,15 +43,22 @@ body {
 }
 
 footer {
+  position: fixed;
+  flex-shrink: 0;
   background-color: rgb(73, 73, 243);
   color: white 12px;
   padding: 10px;
-  position: absolute;
   bottom: 0;
+  left: 0%;
   width: 100%;
 }
 
 .rodape-fonte {
+  color: white;
+}
+
+button:hover {
+  background-color: tomato;
   color: white;
 }
 
