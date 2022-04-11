@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: mediumvioletred;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  background-color: #f2d0e0;
+  padding: 50px;
+  font-size: 12px;
+  width: 100px;
+}
+
+.produtos {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: white;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: flex-end;
+}
+
+footer {
+  padding: 10px;
+  background-color: mediumvioletred;
+  text-align: center;
+}
+.container {
+  display: flex;
+}
