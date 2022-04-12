@@ -1,0 +1,47 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+body {
+  display: grid;
+  grid-template-rows: 10vh 80vh 10vh;
+  grid-template-columns: 100vw;
+}
+
+header {
+  background-color: orange;
+  text-align: center;
+}
+
+header > h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  background-color: azure;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  margin: 10px;
+  gap: 10px;
+}
+
+footer {
+  background-color: olive;
+  text-align: center;
+}
+
+.main-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
