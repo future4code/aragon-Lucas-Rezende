@@ -3,6 +3,7 @@
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-decoration: none;
 }
 
 body {
@@ -20,12 +21,26 @@ body {
   align-items: center;
   align-content: center;
   text-align: center;
+  color: black;
 }
 
-.menu > img {
+.menu img {
   width: 80%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
 }
 
+.menu a {
+  margin: 0;
+  padding: 0;
+}
+
+.menu h2 {
+  color: white;
+  font-size: 2em;
+}
 /* seções de navegação */
 
 .info {
@@ -35,11 +50,51 @@ body {
   color: #c23949;
   align-items: center;
   align-content: center;
-  font-size: 10px;
+  font-size: 1.5em;
+  padding: 2%;
 }
 
 .info img {
   width: 100%;
+}
+
+.info h1 {
+  padding: 0 0 10% 0;
+}
+
+/* nosso serviço */
+
+.nosso-servico {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #c23949;
+  align-items: center;
+  align-content: center;
+  font-size: 2em;
+  padding: 10%;
+  background-image: url(img/fundo-cimento-queimado.png);
+}
+
+.nosso-servico > h1 {
+  padding: 0 0 10% 0;
+  text-shadow: #888888 2px 5px;
+}
+
+.botao-nosso-servico {
+  background-color: #c23949;
+  color: white;
+  font-weight: bold;
+  width: 10vw;
+  border-radius: 20px;
+  box-shadow: 5px 10px 8px #888888;
+  padding: 2%;
+  font-size: 0.6em;
+}
+
+.botao-nosso-servico:hover {
+  background-color: #c96571;
+  color: black;
 }
 
 /* footer */
@@ -53,7 +108,7 @@ footer {
   align-content: center;
   text-align: center;
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
 }
 
 footer .rede-social {
@@ -62,6 +117,47 @@ footer .rede-social {
 
 footer .logo {
   width: 50%;
+}
+
+/* info quem somos */
+
+.info-quem-somos {
+  /* background-image: url(img/entrega.png); */
+  display: grid;
+  grid-template-columns: 2fr 1.7fr;
+  text-align: center;
+  color: #c23949;
+  font-size: 1.5em;
+  padding: 0 0 10% 0;
+}
+
+.info-quem-somos h1 {
+  padding: 10%;
+}
+
+.info-quem-somos p {
+  padding: 2%;
+}
+
+/* primeira entrega */
+
+.info-primeira-entrega {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #c23949;
+  align-items: center;
+  align-content: center;
+  font-size: 2em;
+  padding: 10%;
+}
+
+.info-primeira-entrega h1 {
+  padding: 2%;
+}
+
+.info-primeira-entrega p {
+  padding: 5%;
 }
 
 /* resposividade para celular */
@@ -74,5 +170,31 @@ footer .logo {
   }
   .info img {
     width: 60%;
+  }
+  .menu h2 {
+    font-size: 1em;
+  }
+  .botao-nosso-servico {
+    width: 15vh;
+  }
+  .info-quem-somos {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    font-size: 0.9em;
+  }
+  .info-quem-somos img {
+    width: 100vw;
+  }
+  .info-primeira-entrega {
+    font-size: 0.9em;
+  }
+
+  footer .rede-social {
+    width: 30%;
+  }
+
+  footer .logo {
+    width: 20vw;
   }
 }
