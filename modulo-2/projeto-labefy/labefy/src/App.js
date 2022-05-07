@@ -1,47 +1,106 @@
-import react from "react";
+import React from "react";
 import axios from "axios";
-import Playlists from "./components/Playlists";
+import TelaPlaylists from "./Playlists/playlists";
+import TelaTracks from "./Playlists/tracks";
+import styled from "styled-components";
+import "./App.css";
 
-export default class App extends react.Component {
+const Cadastro = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  background-color: grey;
+`;
+
+const Button = styled.button`
+  margin: 1%;
+  &:hover {
+    background-color: lime;
+    color: white;
+  }
+`;
+
+export default class App extends React.Component {
   state = {
-    nome: "",
+    telaAtual: "playlists",
+    nomePlaylist: "",
   };
 
-  pegarNomePlayList = (e) => {
-    this.setState({ nome: e.target.value });
+  pegarPlayList = () => {
+    const url =
+      "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
+    axios
+      .get(url, {
+        headers: {
+          Authorization: "lucas-macedo-aragon",
+        },
+      })
+      .then((res) => {
+        this.setState({ playlists: res.data.result.list });
+      })
+      .catch((err) => {
+        alert("lista não encontrada!");
+      });
   };
 
-  criarPlaylist = () => {
+  escolheTela = () => {
+    switch (this.state.telaAtual) {
+      case "playlists":
+        return <TelaPlaylists irParaTracks={this.irParaTracks} />;
+      case "tracks":
+        return <TelaTracks irParaPlaylists={this.irParaPlaylists} />;
+      default:
+        return <div>opção não encontrada!</div>;
+    }
+  };
+
+  irParaPlaylists = () => {
+    this.setState({ telaAtual: "playlists" });
+  };
+
+  irParaTracks = () => {
+    this.setState({ telaAtual: "tracks" });
+  };
+
+  cadastrarPlaylist = () => {
     const url =
       "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
     const body = {
-      name: this.state.nome,
+      name: this.state.nomePlaylist,
     };
+
     axios
       .post(url, body, {
         headers: { Authorization: "lucas-macedo-aragon" },
       })
       .then((res) => {
-        alert("playlist cadastrada com sucesso!");
-        this.setState({ nome: "" });
+        alert("usuário cadastrado(a) com sucesso!");
+        this.setState({ nomePlaylist: "" });
+        this.pegarPlayListt();
       })
       .catch((error) => {
         alert(error.response.data.message);
-        this.setState({ nome: "" });
+        this.setState({ nomePlaylist: "" });
       });
+  };
+
+  playlistCadastrada = (e) => {
+    this.setState({ nomePlaylist: e.target.value });
   };
 
   render() {
     return (
-      <div>
+      <Cadastro>
+        <h1>PLAYLISTS</h1>
         <input
-          placeholder="Nome play-list"
-          value={this.state.nome}
-          onChange={this.pegarNomePlayList}
+          placeholder="nova playlist"
+          value={this.state.nomePlaylist}
+          onChange={this.playlistCadastrada}
         />
-        <button onClick={this.criarPlaylist}>criar play-list</button>
-        <Playlists />
-      </div>
+        <Button onClick={this.cadastrarPlaylist}>cadastrar</Button>
+        {this.escolheTela()}
+      </Cadastro>
     );
   }
 }

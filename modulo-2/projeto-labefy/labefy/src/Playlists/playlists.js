@@ -1,18 +1,46 @@
-import react from "react";
+import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-const Div = styled.div`
-  margin: 1%;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  align-content: space-between;
-  width: 300px;
-  border: 1px solid black;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+const MainLista = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 `;
 
-export default class Playlists extends react.Component {
+const ButtonInfo = styled.button`
+  margin: 1%;
+  &:hover {
+    background-color: lime;
+    color: white;
+  }
+`;
+
+const ButtonDeletar = styled.button`
+  margin: 1%;
+  &:hover {
+    background-color: lime;
+    color: white;
+  }
+`;
+
+const Lista = styled.div`
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  align-content: space-between;
+  background-color: #e0e0e0;
+  width: 20em;
+  margin: 1%;
+  padding: 2%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #66ff66;
+  }
+`;
+
+export default class TelaPlaylists extends React.Component {
   state = {
     playlists: [],
   };
@@ -36,7 +64,6 @@ export default class Playlists extends react.Component {
       })
       .then((res) => {
         this.setState({ playlists: res.data.result.list });
-        console.log(res.data);
       })
       .catch((err) => {
         alert("lista não encontrada!");
@@ -63,18 +90,21 @@ export default class Playlists extends react.Component {
   render() {
     const novaPlayList = this.state.playlists.map((playlist) => {
       return (
-        <Div>
+        <Lista>
           {playlist.name}
-          <button
+          <ButtonInfo playId={playlist.id} onClick={this.props.irParaTracks}>
+            info
+          </ButtonInfo>
+          <ButtonDeletar
             onClick={() => {
               this.deletarPlaylist(playlist.id);
             }}
           >
             deletar{" "}
-          </button>
-        </Div>
+          </ButtonDeletar>
+        </Lista>
       );
     });
-    return <div>{novaPlayList}</div>;
+    return <MainLista>{novaPlayList}</MainLista>;
   }
 }
