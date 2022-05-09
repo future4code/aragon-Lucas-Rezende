@@ -4,10 +4,21 @@ import styled from "styled-components";
 
 const ButtonVoltar = styled.button`
   margin: 0 0 20% 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
   &:hover {
     background-color: lime;
     color: white;
   }
+`;
+
+const Tracks = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 `;
 
 export default class TelaTracks extends React.Component {
@@ -15,8 +26,12 @@ export default class TelaTracks extends React.Component {
     tracks: [],
   };
 
+  componentDidMount() {
+    this.pegarPlayListTrack(this.props.id);
+  }
+
   pegarPlayListTrack = (id) => {
-    const url = `https://us-central1-labenu-apis.cloudfunctions.net/labefy/${id}/tracks;`;
+    const url = `https://us-central1-labenu-apis.cloudfunctions.net/labefy/${id}/tracks`;
     axios
       .get(url, {
         headers: {
@@ -24,23 +39,21 @@ export default class TelaTracks extends React.Component {
         },
       })
       .then((res) => {
-        this.setState({ tracks: res.data.result.name });
+        this.setState({ tracks: res.data });
       })
       .catch((err) => {
-        alert("ocorreu um erro tente novamente!");
+        console.error(err);
       });
   };
 
   render() {
     return (
-      <div>
+      <Tracks>
+        <h1>TRACKS</h1>
         <ButtonVoltar onClick={this.props.irParaPlaylists}>voltar</ButtonVoltar>
-        <p>
-          {() => {
-            this.pegarPlayListTrack(this.props.playId);
-          }}
-        </p>
-      </div>
+        {this.state.tracks}
+        <p>{this.props.id}</p>
+      </Tracks>
     );
   }
 }

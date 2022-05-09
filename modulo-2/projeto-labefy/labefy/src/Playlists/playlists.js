@@ -39,10 +39,17 @@ const Lista = styled.div`
     background-color: #66ff66;
   }
 `;
-
+const Button = styled.button`
+  margin: 1%;
+  &:hover {
+    background-color: lime;
+    color: white;
+  }
+`;
 export default class TelaPlaylists extends React.Component {
   state = {
     playlists: [],
+    nomePlaylist: "",
   };
 
   componentDidMount() {
@@ -87,12 +94,59 @@ export default class TelaPlaylists extends React.Component {
       });
   };
 
+  cadastrarPlaylist = () => {
+    const url =
+      "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
+    const body = {
+      name: this.state.nomePlaylist,
+    };
+
+    axios
+      .post(url, body, {
+        headers: { Authorization: "lucas-macedo-aragon" },
+      })
+      .then((res) => {
+        alert("usuário cadastrado(a) com sucesso!");
+        this.setState({ nomePlaylist: "" });
+        this.pegarPlayListt();
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+        this.setState({ nomePlaylist: "" });
+      });
+  };
+
+  playlistCadastrada = (e) => {
+    this.setState({ nomePlaylist: e.target.value });
+  };
+
+  pegarPlayList = () => {
+    const url =
+      "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
+    axios
+      .get(url, {
+        headers: {
+          Authorization: "lucas-macedo-aragon",
+        },
+      })
+      .then((res) => {
+        this.setState({ playlists: res.data.result.list });
+      })
+      .catch((err) => {
+        alert("lista não encontrada!");
+      });
+  };
+
   render() {
     const novaPlayList = this.state.playlists.map((playlist) => {
       return (
         <Lista>
           {playlist.name}
-          <ButtonInfo playId={playlist.id} onClick={this.props.irParaTracks}>
+          <ButtonInfo
+            onClick={() => {
+              this.props.irParaTracks(playlist.id);
+            }}
+          >
             info
           </ButtonInfo>
           <ButtonDeletar
@@ -105,6 +159,17 @@ export default class TelaPlaylists extends React.Component {
         </Lista>
       );
     });
-    return <MainLista>{novaPlayList}</MainLista>;
+    return (
+      <MainLista>
+        <h1>PLAYLIST</h1>
+        <input
+          placeholder="nova playlist"
+          value={this.state.nomePlaylist}
+          onChange={this.playlistCadastrada}
+        />
+        <Button onClick={this.cadastrarPlaylist}>cadastrar</Button>
+        {novaPlayList}
+      </MainLista>
+    );
   }
 }
