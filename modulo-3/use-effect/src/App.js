@@ -116,6 +116,7 @@ function App(props) {
       <Nav>
         <Label htmlFor={"pokemon selecionado"}>Escolha um pokemon: </Label>
         <Select value={pokemonSelecionado} onChange={changePokemon}>
+          <option value={""}>Nenhum</option>
           {listaPokemon.map((pokemon) => {
             return (
               <option value={pokemon.name} key={pokemon.name}>
