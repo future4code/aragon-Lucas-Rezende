@@ -1,6 +1,14 @@
 import Perfis from "./components/Perfis";
 import Matches from "./components/Matches";
 import { useState } from "react";
+import "./App.css";
+import styled from "styled-components";
+
+const Div = styled.div`
+  background-color: salmon;
+  padding: 0;
+  margin: 0;
+`;
 
 function App(props) {
   const [paginaAtual, setPaginaAtual] = useState("perfis");
@@ -22,7 +30,7 @@ function App(props) {
   const vaiParaMatches = () => {
     setPaginaAtual("matches");
   };
-  return <div>{escolheTela()}</div>;
+  return <Div>{escolheTela()}</Div>;
 }
 
 export default App;
