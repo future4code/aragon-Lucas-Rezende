@@ -98,9 +98,7 @@ function Perfis(props) {
     axios
       .post(`${Url}/${Path}/choose-person`, body)
       .then((res) => {
-        if (window.confirm("Dar um matche?") === true) {
-          getPerfil();
-        }
+        getPerfil();
       })
       .catch((err) => {
         console.log(err.message);
@@ -137,15 +135,16 @@ function Perfis(props) {
       <div>
         <Button
           onClick={() => {
-            escolherPerfil(perfil.id, true);
+            if (window.confirm("Dar um match?") === true)
+              escolherPerfil(perfil.id, true);
           }}
         >
           💓
         </Button>
         <Button
           onClick={() => {
-            if (window.confirm("Fica para a próxima!?") === true) {
-              getPerfil();
+            if (window.confirm("Fica para a próxima?") === true) {
+              escolherPerfil(perfil.id, false);
             }
           }}
         >
