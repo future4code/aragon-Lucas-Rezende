@@ -14,7 +14,7 @@ const Main = styled.main`
 function AdminPage() {
   return (
     <Main>
-      <Header activePage={"admin-page"} />
+      <Header activePage={"admin-page"} token={"token"} />
       <h3>Crie uma nova viagem!</h3>
       <hr></hr>
       <TripList />

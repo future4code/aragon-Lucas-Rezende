@@ -16,10 +16,11 @@ const Main = styled.main`
 const Button = styled.button`
   background-color: purple;
   color: white;
-  margin: 1%;
+  margin: 2%;
   padding: 5%;
   &:hover {
     cursor: pointer;
+    color: lime;
   }
 `;
 
@@ -48,7 +49,7 @@ function Header(props) {
 
     axios
       .post(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labeX/darvas/login",
+        "https://us-central1-labenu-apis.cloudfunctions.net/labeX/lucas-rezende-aragon/login",
         body
       )
       .then((res) => {
@@ -86,6 +87,13 @@ function Header(props) {
         );
       case "admin-page":
         return <Button onClick={logout}>Logout</Button>;
+      case "detail-page":
+        return (
+          <div>
+            <Button onClick={logout}>Logout</Button>
+            <Button>admin</Button>
+          </div>
+        );
     }
   };
 
@@ -93,25 +101,12 @@ function Header(props) {
     if (!token) {
       NavigateToHome(navigate);
     }
-
-    axios
-      .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labeX/darvas/trip/3bUbdB1gvPzWrThpazVC",
-        {
-          headers: {
-            auth: token,
-          },
-        }
-      )
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.response.data));
   }, []);
 
   const logout = () => {
     localStorage.removeItem("token");
     alert("logout realizado com sucesso!");
     NavigateToHome(navigate);
-    console.log("foi");
   };
 
   return (

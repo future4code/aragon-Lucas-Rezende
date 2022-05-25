@@ -5,3 +5,7 @@ export const NavigateToAdmin = (navigate) => {
 export const NavigateToHome = (navigate) => {
   navigate("/");
 };
+
+export const NavigateToDetail = (navigate, id) => {
+  navigate(`/admin/trips/${id}`);
+};

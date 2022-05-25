@@ -8,7 +8,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   align-content: center;
-  text-align: rigth;
+  text-align: center;
 `;
 
 function HomePage() {
