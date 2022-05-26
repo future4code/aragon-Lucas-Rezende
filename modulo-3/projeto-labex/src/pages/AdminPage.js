@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import TripList from "../components/TripList";
 import styled from "styled-components";
+import NewTrip from "../components/NewTrip";
 
 const Main = styled.main`
   color: white;
@@ -15,8 +16,8 @@ function AdminPage() {
   return (
     <Main>
       <Header activePage={"admin-page"} token={"token"} />
-      <h3>Crie uma nova viagem!</h3>
-      <hr></hr>
+      <h2>Crie em uma viagem!</h2>
+      <NewTrip />
       <TripList />
     </Main>
   );

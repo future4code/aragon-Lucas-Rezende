@@ -11,13 +11,14 @@ const Main = styled.main`
   align-content: center;
   text-align: center;
   color: white;
+  margin: 10%;
 `;
 
 const Button = styled.button`
   background-color: purple;
   color: white;
-  margin: 2%;
-  padding: 5%;
+  margin: 4%;
+  padding: 10%;
   &:hover {
     cursor: pointer;
     color: lime;
@@ -91,7 +92,7 @@ function Header(props) {
         return (
           <div>
             <Button onClick={logout}>Logout</Button>
-            <Button>admin</Button>
+            <Button onClick={() => NavigateToAdmin(navigate)}>admin</Button>
           </div>
         );
     }
