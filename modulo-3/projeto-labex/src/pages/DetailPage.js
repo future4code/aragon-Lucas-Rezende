@@ -15,6 +15,7 @@ const Main = styled.main`
 
 function DetailPage() {
   const [details, setDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const { idTrip } = useParams();
 
@@ -33,6 +34,7 @@ function DetailPage() {
       })
       .then((res) => {
         setDetails(res.data.trip);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);

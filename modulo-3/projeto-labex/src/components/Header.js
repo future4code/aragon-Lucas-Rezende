@@ -11,14 +11,14 @@ const Main = styled.main`
   align-content: center;
   text-align: center;
   color: white;
-  margin: 10%;
+  margin: 1%;
 `;
 
 const Button = styled.button`
   background-color: purple;
   color: white;
   margin: 4%;
-  padding: 10%;
+  padding: 20px;
   &:hover {
     cursor: pointer;
     color: lime;

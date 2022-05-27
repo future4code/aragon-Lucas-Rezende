@@ -17,9 +17,9 @@ const Button = styled.button`
 
 function TripList(props) {
   const [trips, setTrips] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,6 +55,7 @@ function TripList(props) {
       })
       .then((res) => {
         setTrips(res.data.trips);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
@@ -75,7 +76,9 @@ function TripList(props) {
       if (token !== null) return buttons;
     };
 
-    return (
+    return isLoading ? (
+      <p>carregando...</p>
+    ) : (
       <div>
         <p>Nome: {trip.name}</p>
         <p>Descrição: {trip.description} </p>

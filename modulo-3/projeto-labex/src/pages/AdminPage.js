@@ -16,7 +16,7 @@ function AdminPage() {
   return (
     <Main>
       <Header activePage={"admin-page"} token={"token"} />
-      <h2>Crie em uma viagem!</h2>
+
       <NewTrip />
       <TripList />
     </Main>
