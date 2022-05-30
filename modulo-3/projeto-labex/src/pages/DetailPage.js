@@ -13,6 +13,28 @@ const Main = styled.main`
   text-align: center;
 `;
 
+const Button = styled.button`
+  background-color: purple;
+  color: white;
+  margin: 10%;
+  padding: 5%;
+  &:hover {
+    cursor: pointer;
+    color: lime;
+  }
+`;
+
+const ButtonRep = styled.button`
+  background-color: purple;
+  color: white;
+  margin: 10%;
+  padding: 5%;
+  &:hover {
+    cursor: pointer;
+    color: tomato;
+  }
+`;
+
 function DetailPage() {
   const [details, setDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +63,26 @@ function DetailPage() {
       });
   };
 
+  const decide = (id, idCand, Aproved) => {
+    const url = `https://us-central1-labenu-apis.cloudfunctions.net/labeX/lucas-rezende-aragon/trips/${id}/candidates/${idCand}/decide`;
+    const body = {
+      approve: { Aproved },
+    };
+
+    axios
+      .put(url, body, {
+        headers: {
+          auth: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        GetTripDetail(idTrip);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const candidatesList =
     details &&
     details.candidates?.map((candidate) => {
@@ -51,6 +93,22 @@ function DetailPage() {
           <p>Idade: {candidate.age} </p>
           <p>País: {candidate.country}</p>
           <p>Texto de Candidatura: {candidate.applicationText} </p>
+          <Button
+            onClick={() => {
+              if (window.confirm("Deseja aprovar candidatura?") === true)
+                decide(idTrip, candidate.id, true);
+            }}
+          >
+            Aprovar
+          </Button>
+          <ButtonRep
+            onClick={() => {
+              if (window.confirm("Deseja reprovar candidatura?") === true)
+                decide(idTrip, candidate.id, false);
+            }}
+          >
+            Reprovar
+          </ButtonRep>
         </div>
       );
     });

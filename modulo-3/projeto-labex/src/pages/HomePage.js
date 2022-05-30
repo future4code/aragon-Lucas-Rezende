@@ -12,14 +12,14 @@ const Main = styled.main`
   text-align: center;
 `;
 
-function HomePage() {
+function HomePage(props) {
   return (
     <Main>
       <Header activePage={"home-page"} />
       <h1>Inscreva-se numa viagem!</h1>
       <DecideForm />
       <hr></hr>
-      <TripList />
+      <TripList TripsSelect={props.TripsSelect} />
     </Main>
   );
 }

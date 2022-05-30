@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import axios from "axios";
 import { planets } from "../routes/constantes/planets";
+import moment from "moment";
 
 const Button = styled.button`
   background-color: purple;
@@ -61,16 +62,8 @@ function NewTrip() {
     planet: "",
     date: "",
     description: "",
-    durationTime: "",
+    durationInDays: 0,
   });
-
-  const body = {
-    name: form.name,
-    planet: form.planet,
-    date: form.date,
-    description: form.description,
-    durationTime: form.durationTime,
-  };
 
   const confirm = (e) => {
     e.preventDefault();
@@ -78,6 +71,14 @@ function NewTrip() {
   };
 
   const createTrip = () => {
+    const body = {
+      name: form.name,
+      planet: form.planet,
+      date: moment(form.date.dueDate).format("DD/MM/YYYY"),
+      description: form.description,
+      durationInDays: form.durationTime,
+    };
+
     axios
       .post(
         "https://us-central1-labenu-apis.cloudfunctions.net/labeX/lucas-rezende-aragon/trips",
@@ -89,9 +90,9 @@ function NewTrip() {
         }
       )
       .then((res) => {
-        changeForm(res.data.trips);
+        alert("viagem criada com sucesso!");
       })
-      .catch((err) => alert("erro ao enviar nova viagem!"));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -150,6 +151,7 @@ function NewTrip() {
           <Input
             id="duração"
             name="durationTime"
+            type="number"
             value={form.durationTime}
             onChange={changeForm}
           />

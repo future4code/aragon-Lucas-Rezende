@@ -1,6 +1,9 @@
 import { countrys } from "../routes/constantes/countrys";
 import { useForm } from "./hooks/useForm";
 import styled from "styled-components";
+import axios from "axios";
+import moment from "moment";
+import { useEffect, useState } from "react";
 
 const Button = styled.button`
   background-color: purple;
@@ -31,7 +34,7 @@ const Input = styled.input`
   display: block;
   float: right;
   width: 200px;
-  font-size: 0.7em;
+  font-size: 1em;
 `;
 
 const Select = styled.select`
@@ -43,56 +46,96 @@ const Select = styled.select`
   background-color: black;
 `;
 
-const Div = styled.div`
-  margin: 2%;
-  width: 500px;
-`;
-
 const Label = styled.label`
   font-size: 1em;
   width: 300px;
 `;
 
-function DecideForm(props) {
+const Div = styled.div`
+  margin: 2%;
+  width: 500px;
+`;
+
+function DecideForm() {
   const [form, changeForm] = useForm({
-    trip: "",
     name: "",
-    age: "",
-    candidateText: "",
+    age: null,
+    applicationText: "",
     job: "",
     country: "",
   });
 
-  const body = {
-    name: form.name,
-    planet: form.planet,
-    date: form.date,
-    description: form.description,
-    durationTime: form.durationTime,
+  const [trips, setTrips] = useState([]);
+
+  const [tripId, setTripId] = useState("");
+
+  useEffect(() => {
+    getTrip();
+  }, []);
+
+  const getTrip = () => {
+    const url =
+      "https://us-central1-labenu-apis.cloudfunctions.net/labeX/lucas-rezende-aragon/trips";
+    axios
+      .get(url, {
+        headers: {
+          Authorization: "lucas-aragon",
+        },
+      })
+      .then((res) => {
+        setTrips(res.data.trips);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
-  const confirm = (e) => {
-    e.preventDefault();
+  const aplicationTrip = (id) => {
+    const body = {
+      name: form.name,
+      age: form.age,
+      applicationText: form.candidateText,
+      profession: form.job,
+      country: form.country,
+    };
+
+    axios
+      .post(
+        `https://us-central1-labenu-apis.cloudfunctions.net/labeX/lucas-rezende-aragon/trips/${id}/apply`,
+        body
+      )
+      .then((res) => {
+        alert("Candidatura realizada com sucesso!");
+      })
+      .catch((err) => console.log(err.message));
   };
 
-  const optionTrip = () => {
-    return <option value="mercury">Mercúrio</option>;
+  const onchangeTripId = (e) => {
+    setTripId(e.target.value);
+  };
+
+  const optionTrip = () =>
+    trips.map((trip) => {
+      return <option value={trip.id}>{trip.name}</option>;
+    });
+
+  const SendCandidate = (event) => {
+    event.preventDefault();
+    aplicationTrip(tripId);
   };
 
   return (
     <Main>
-      <h2>Inscreva em uma nova viagem!</h2>
-
-      <form onSubmit={confirm}>
+      <form onSubmit={SendCandidate}>
         <Div>
           <label htmlFor="viagens">Escolha uma viagem: </label>
           <Select
             id="viagens"
             name="trip"
-            value={form.trip}
-            onChange={changeForm}
+            defaultValue=""
+            onChange={onchangeTripId}
           >
-            {optionTrip}
+            {optionTrip()}
           </Select>
         </Div>
 
@@ -112,7 +155,6 @@ function DecideForm(props) {
             id="idade"
             name="age"
             type="number"
-            min="18"
             value={form.age}
             onChange={changeForm}
           />
@@ -123,7 +165,7 @@ function DecideForm(props) {
           <Input
             id="candidatura"
             name="candidateText"
-            value={form.candidate}
+            value={form.candidateText}
             onChange={changeForm}
           />
         </Div>
@@ -135,7 +177,6 @@ function DecideForm(props) {
             name="job"
             value={form.job}
             onChange={changeForm}
-            type="date"
           />
         </Div>
 
