@@ -12,8 +12,18 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  const onChangeForm = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const onChangeEmail = (e) => {
+    setForm({
+      ...form,
+      ["email"]: e.target.value,
+    });
+  };
+
+  const onChangePassword = (e) => {
+    setForm({
+      ...form,
+      ["password"]: e.target.value,
+    });
   };
 
   const login = (e) => {
@@ -27,7 +37,7 @@ export default function LoginPage() {
         goToPost(navigate);
       })
       .catch((err) => {
-        console.log(err);
+        alert("Usuário ou senha errado!");
       });
   };
 
@@ -41,7 +51,7 @@ export default function LoginPage() {
           id="email"
           name="email"
           value={form.email}
-          onChange={onChangeForm}
+          onChange={onChangeEmail}
           required
         />
         <br />
@@ -50,7 +60,7 @@ export default function LoginPage() {
           id="senha"
           name="password"
           value={form.password}
-          onChange={onChangeForm}
+          onChange={onChangePassword}
           type="password"
           required
         />
