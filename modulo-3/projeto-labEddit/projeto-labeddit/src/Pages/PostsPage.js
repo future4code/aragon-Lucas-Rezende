@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { goToLogin } from "../routes/coordinator";
-import { Url } from "../constants/urls";
+import { PostCard } from "../components/PostCard";
+import GlobalContext from "../global/GlobalContext";
 import axios from "axios";
-import moment from "moment";
+import { Url } from "../constants/urls";
 
 export default function PostPage() {
   const [form, setForm] = useState({
     title: "",
     body: "",
   });
+  const { getters, states } = useContext(GlobalContext);
 
-  const [posts, setPosts] = useState([]);
+  const { getPosts } = getters;
+
+  const { posts } = states;
 
   const navigate = useNavigate();
 
@@ -40,23 +44,15 @@ export default function PostPage() {
       });
   };
 
-  const getPosts = () => {
-    axios
-      .get(`${Url}/posts?page=1&size=10`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   useEffect(() => {
     getPosts();
   }, []);
+
+  const showPosts =
+    posts.length &&
+    posts.map((post) => {
+      return <PostCard key={post.id} post={post} isFeed={true} />;
+    });
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -77,6 +73,8 @@ export default function PostPage() {
           name="title"
           value={form.title}
           onChange={onChangeTitle}
+          pattern={"^.{5,}$"}
+          title={"O título deve ter no mínimo 5 caracteres"}
           required
         />
         <br />
@@ -86,42 +84,15 @@ export default function PostPage() {
           name="body"
           value={form.body}
           onChange={onChangeBody}
+          pattern={"^.{10,}$"}
+          title={"O texto deve ter no mínimo 10 caracteres"}
           required
         />
         <br />
         <button>criar post</button>
       </form>
       <hr />
-      {posts.map((post) => (
-        <div Key={post.id}>
-          <h2>{post.title}</h2>
-          <p>
-            <b>Autor:</b>
-            {post.userId}
-          </p>
-          <p>
-            <b>Criado em:</b>
-            {moment.utc(post.createdAt).format("DD/MM/YYYY")}
-          </p>
-          <img
-            src={"https://picsum.photos/200/300?random=" + post.id}
-            alt="Imagem aleatória do post"
-          />
-          <p>
-            <b>Descrição:</b>
-            {post.body}
-          </p>
-          {/* {voteSum ? voteSum : 0}
-           */}
-          <p>Votos: 0</p>
-          <button>Não Gostei</button>
-          <button>Gostei</button>
-          {/* {commentCount ? commentCount : 0} */}
-          <p>Comentários: 0</p>
-          <button>comentários</button>
-          <hr />
-        </div>
-      ))}
+      {showPosts}
     </div>
   );
 }
