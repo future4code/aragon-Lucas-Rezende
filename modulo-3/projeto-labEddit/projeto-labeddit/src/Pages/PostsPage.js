@@ -51,7 +51,7 @@ export default function PostPage() {
   const showPosts =
     posts.length &&
     posts.map((post) => {
-      return <PostCard key={post.id} post={post} isFeed={true} />;
+      return <PostCard key={post.id} post={post} isPosts={true} />;
     });
 
   useEffect(() => {

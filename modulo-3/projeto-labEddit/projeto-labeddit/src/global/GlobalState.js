@@ -27,25 +27,6 @@ export const GlobalState = (props) => {
       });
   };
 
-  // const getPostComments = (id) => {
-  //   const header = {
-  //     headers: {
-  //       authorization: localStorage.getItem("token"),
-  //     },
-  //   };
-
-  //   axios
-  //     .get(`${Url}/posts/${id}/comments`, header)
-  //     .then((res) => {
-  //       setPostComments(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // };
-
-  // getPostComments
-
   const states = { posts, post, postComments };
 
   const setters = { setPosts, setPost, setPostComments };

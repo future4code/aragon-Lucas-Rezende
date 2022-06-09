@@ -4,7 +4,7 @@ export function CommentCard(props) {
   const { userId, body, createdAt, voteSum } = props.comment;
 
   return (
-    <>
+    <div>
       <article>
         <h3>{body}</h3>
         <span>
@@ -15,12 +15,9 @@ export function CommentCard(props) {
           <b>Criado em: </b>
           {moment.utc(createdAt).format("DD/MM/YYYY")}
         </p>
-        {/* <p>Votos: {voteSum ? voteSum : 0}</p> */}
-        <button>Não Gostei</button>
-        <br />
-        <button>Gostei</button>
+        <p>Votos: {voteSum ? voteSum : 0}</p>
         <hr />
       </article>
-    </>
+    </div>
   );
 }
