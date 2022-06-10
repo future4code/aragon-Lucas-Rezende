@@ -1,8 +1,36 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import Header from "../components/Header";
 import { goToPost, goToSignup } from "../routes/coordinator";
+
+const Div = styled.div`
+  background-color: Gainsboro;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+  font-size: 1em;
+  font-weight: 600;
+  height: 7vh;
+  border-radius: 10px;
+  margin: 2%;
+
+  &:hover {
+    background-color: orange;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+  }
+`;
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -42,7 +70,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
+    <Div>
       <Header />
       <h2>Login</h2>
       <form onSubmit={login}>
@@ -65,11 +93,11 @@ export default function LoginPage() {
           required
         />
         <br />
-        <button>Entrar</button>
+        <Button>Entrar</Button>
       </form>
       <hr />
       <h2>Não tem cadastro? cadastre-se agora:</h2>
-      <button onClick={() => goToSignup(navigate)}>cadastrar</button>
-    </div>
+      <Button onClick={() => goToSignup(navigate)}>cadastrar</Button>
+    </Div>
   );
 }

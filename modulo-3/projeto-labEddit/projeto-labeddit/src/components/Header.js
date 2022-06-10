@@ -12,9 +12,17 @@ const Div = styled.div`
   background-color: Gainsboro;
   padding: 1%;
   text-align: center;
+
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Button = styled.button`
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
   font-size: 1em;
   font-weight: 600;
   width: 70px;

@@ -5,6 +5,42 @@ import { goToPostDetailsPage } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { Url } from "../constants/urls";
 import axios from "axios";
+import styled from "styled-components";
+
+const Div = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background-color: white;
+  margin: 2%;
+  padding: 2%;
+  &:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.05);
+  }
+`;
+
+const Button = styled.button`
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+  font-size: 1em;
+  font-weight: 600;
+  height: 7vh;
+  border-radius: 10px;
+  margin: 2%;
+
+  &:hover {
+    background-color: orange;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+  }
+`;
+
+const Img = styled.img`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 export function PostCard(props) {
   const navigate = useNavigate();
@@ -69,7 +105,7 @@ export function PostCard(props) {
 
   const chooseVote = (typeVote) => {
     if (typeVote === "up") {
-      if (isDownVoted) {
+      if (notVoted) {
         changePostVote(props.post.id, 1, getPosts);
 
         setIsUpVoted(true);
@@ -80,7 +116,7 @@ export function PostCard(props) {
         setIsUpVoted(true);
       }
     } else {
-      if (isUpVoted) {
+      if (voted) {
         changePostVote(props.post.id, -1, getPosts);
 
         setIsDownVoted(true);
@@ -115,28 +151,28 @@ export function PostCard(props) {
   };
 
   const renderButtons = props.isFeed ? (
-    <>
+    <div>
       {props.post.userVote && isDownVoted ? (
-        <button onClick={() => removeVote("down")}>Remover Não Gostei</button>
+        <Button onClick={() => removeVote("down")}>Remover Não Gostei</Button>
       ) : (
-        <button onClick={() => chooseVote("down")}>
+        <Button onClick={() => chooseVote("down")}>
           {isUpVoted ? `Mudar para Não Gostei` : `Não Gostei`}
-        </button>
+        </Button>
       )}
       <br />
       {props.post.userVote && isUpVoted ? (
-        <button onClick={() => removeVote("up")}>Remover Gostei</button>
+        <Button onClick={() => removeVote("up")}>Remover Gostei</Button>
       ) : (
-        <button onClick={() => chooseVote("up")}>
+        <Button onClick={() => chooseVote("up")}>
           {isDownVoted ? `Mudar para Gostei` : `Gostei`}
-        </button>
+        </Button>
       )}
-    </>
+    </div>
   ) : (
     <></>
   );
   return (
-    <article>
+    <Div>
       <div Key={props.post.id}>
         <h2>{props.post.title}</h2>
         <p>
@@ -147,7 +183,7 @@ export function PostCard(props) {
           <b>Criado em:</b>
           {moment.utc(props.post.createdAt).format("DD/MM/YYYY")}
         </p>
-        <img
+        <Img
           src={"https://picsum.photos/200/300?random=" + props.post.id}
           alt="Imagem aleatória do post"
         />
@@ -159,13 +195,11 @@ export function PostCard(props) {
         {renderButtons}
         <p>Comentários: {postComments.length}</p>
       </div>
-
-      {props.isPosts && (
-        <button onClick={() => goToComments(navigate, props.post.id)}>
+      {props.isFeed && (
+        <Button onClick={() => goToComments(navigate, props.post.id)}>
           Ver comentários
-        </button>
+        </Button>
       )}
-      <hr />
-    </article>
+    </Div>
   );
 }

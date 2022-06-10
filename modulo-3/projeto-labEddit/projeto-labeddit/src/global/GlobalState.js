@@ -8,9 +8,13 @@ export const GlobalState = (props) => {
 
   const [post, setPost] = useState({});
 
+  const [page, setPage] = useState(1);
+
   const [postComments, setPostComments] = useState([]);
 
-  const getPosts = () => {
+  const size = 10;
+
+  const getPosts = (currentPage) => {
     const header = {
       headers: {
         authorization: localStorage.getItem("token"),
@@ -18,7 +22,7 @@ export const GlobalState = (props) => {
     };
 
     axios
-      .get(`${Url}/posts?page=1&size=10`, header)
+      .get(`${Url}/posts?page=${currentPage}&size=${size}`, header)
       .then((res) => {
         setPosts(res.data);
       })
@@ -27,9 +31,9 @@ export const GlobalState = (props) => {
       });
   };
 
-  const states = { posts, post, postComments };
+  const states = { posts, post, postComments, page };
 
-  const setters = { setPosts, setPost, setPostComments };
+  const setters = { setPosts, setPost, setPostComments, setPage };
 
   const getters = { getPosts };
   return (
