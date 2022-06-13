@@ -13,6 +13,7 @@ const Div = styled.div`
   background-color: white;
   margin: 2%;
   padding: 2%;
+  width: 30vw;
   &:hover {
     -webkit-transform: scale(1.5);
     transform: scale(1.05);
@@ -177,7 +178,7 @@ export function PostCard(props) {
         <h2>{props.post.title}</h2>
         <p>
           <b>Autor:</b>
-          {props.post.userId}
+          {props.post.username}
         </p>
         <p>
           <b>Criado em:</b>

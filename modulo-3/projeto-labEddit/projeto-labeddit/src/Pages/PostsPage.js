@@ -98,7 +98,7 @@ export default function PostPage() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [posts]);
 
   const showPosts =
     posts.length &&
