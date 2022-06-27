@@ -1,0 +1,13 @@
+{
+  "name": "worklist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "workList.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "list": "node workList.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

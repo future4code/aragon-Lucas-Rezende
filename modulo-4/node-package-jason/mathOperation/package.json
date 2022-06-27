@@ -1,0 +1,13 @@
+{
+  "name": "mathoperation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mathOperation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "math": "node mathOperation.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
