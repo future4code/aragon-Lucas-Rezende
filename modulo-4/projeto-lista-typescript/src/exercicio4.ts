@@ -7,12 +7,7 @@ enum SECTION {
 const employees: Employee[] = [
   { nome: "Marcos", salário: 2500, setor: SECTION.MARKETING, presencial: true },
   { nome: "Maria", salário: 1500, setor: SECTION.VENDAS, presencial: false },
-  {
-    nome: "Salete",
-    salário: 2200,
-    setor: SECTION.FINANCEIRO,
-    presencial: true,
-  },
+  { nome: "Salet", salário: 2200, setor: SECTION.FINANCEIRO, presencial: true },
   { nome: "João", salário: 2800, setor: SECTION.MARKETING, presencial: false },
   { nome: "Josué", salário: 5500, setor: SECTION.FINANCEIRO, presencial: true },
   { nome: "Natalia", salário: 4700, setor: SECTION.VENDAS, presencial: true },
@@ -26,7 +21,7 @@ type Employee = {
   presencial: boolean;
 };
 
-const filterEmployees = (employees: Employee[]): object[] => {
+const filterEmployees = (employees: Employee[]): Employee[] => {
   return employees.filter((employee) => {
     return employee.setor === SECTION.MARKETING && employee.presencial === true;
   });
