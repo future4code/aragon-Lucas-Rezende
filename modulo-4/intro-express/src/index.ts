@@ -84,7 +84,7 @@ app.put("/users/:id", (req: Request, res: Response) => {
 
 // exercicio 6
 
-app.delete("/playlist/:id", (req: Request, res: Response) => {
+app.delete("/users/:id", (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const index = users.findIndex((user) => user.id === id);
   users.splice(index, 1);
