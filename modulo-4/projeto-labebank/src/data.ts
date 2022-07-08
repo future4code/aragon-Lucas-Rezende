@@ -9,6 +9,7 @@ export type ClientAcount = {
   nome:string,
   CPF:string,
   dataDeNascimento: string,
+  saldo:number,
   listaDeContasPagas:PaidAcount[]
 }
 
@@ -18,6 +19,7 @@ export const clientList:ClientAcount[]=[
   nome:"lucas macedo",
   CPF:"111.111.111-11",
   dataDeNascimento: "26/04/1990",
+  saldo:0,
   listaDeContasPagas:[
     {
       valor:50,

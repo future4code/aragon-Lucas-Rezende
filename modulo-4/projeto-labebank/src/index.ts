@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express"
 import cors from "cors"
-import { ClientAcount, clientList } from "./data"
+import { ClientAcount, clientList, PaidAcount } from "./data"
 
 
 const app = express()
@@ -41,22 +41,28 @@ app.post("/users",(req:Request,res:Response)=>{
       throw new Error("type invalid of 'data de nascimento'.")
     }
 
-    const dateInvert = new Date(dataDeNascimento)
-
-    const actualDate = new Date
-
-    const clientAge = Math.floor(
-      (actualDate.getTime() - dateInvert.getTime())
-      / 1000 / 60 / 60 / 24 / 365.25)
+    function calculateYears(dataInvert: string): number {
+        const dateInvert = new Date(dataInvert)
+        const dateAtual = new Date
+        const age = Math.floor(
+            (dateAtual.getTime() - dateInvert.getTime())
+            / 1000 / 60 / 60 / 24 / 365.25
+        )
     
+        return age
+    }
+
+    const dataNascInvert = dataDeNascimento.split("/").reverse().join("/")
+
     const CPFindex = clientList.findIndex(client => client.CPF === CPF)
 
-    if (CPFindex === -1 && clientAge >= 18 && nome.length > 3){
+    if (CPFindex === -1 && calculateYears(dataNascInvert) >= 18 && nome.length > 3){
       const client: ClientAcount = {
         id:clientList.length + 1,
         nome:nome,
         CPF:CPF,
         dataDeNascimento: dataDeNascimento,
+        saldo:0,
         listaDeContasPagas:[{
           valor:0,
           descrição:"",
@@ -94,26 +100,25 @@ app.get("/users/:id", (req:Request,res:Response)=>{
     throw new Error("'id' does not exist.")
   }
 
-  const listaDeContas = clientList[idIndex].listaDeContasPagas
-
-  const saldo = listaDeContas[listaDeContas.length-1].valor
 
   res.status(201).send({
-    message: "the client 'saldo' is:",
-    products: saldo,
-  });
+    message: `the client ${clientList[idIndex].nome} have:`,
+    saldo: clientList[idIndex].saldo.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    })});
 
-  } catch (error) {
-    
+} catch (error) {
+    res.send({message: error.message})
   }
-})
+}) 
 
 app.put("/users/:id", (req:Request, res:Response)=>{
   try {
-    
+
     const id = Number(req.params.id) ;
 
-    const { valor, descricao, dataDePagamento } = req.body;
+    const { credito } = req.body;
 
     const idIndex = clientList.findIndex(client => client.id === id)
 
@@ -121,14 +126,104 @@ app.put("/users/:id", (req:Request, res:Response)=>{
       res.statusCode = 422
       throw new Error("'id' does not exist.")
     }
+    
+   if(typeof credito !== "number"){
+    res.statusCode = 422
+    throw new Error("type invalid of 'number'.")
+   }
+
+   if (credito < 0){
+    res.statusCode = 422
+    throw new Error("'credito' need to be more than 0.")
+   }
+   
+
+    clientList[idIndex].saldo+=credito
+
+
+    res.status(201).send({
+        message: "credito feito com sucesso:",
+        valor: credito.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        }) });
+
+} catch (error) {
+    res.send({message: error.message})
+  }
+}) 
+
+app.put("/users/:id/pay",(req:Request,res:Response)=>{
+    try {
+
+  const id = Number(req.params.id)
+
+  const {valor,descricao,data} = req.body  
+  
+  const idIndex = clientList.findIndex(client => client.id === id)
+
+
+  const saldo = clientList[idIndex].saldo
+
+    if (idIndex === -1){
+      res.statusCode = 422
+      throw new Error("'id' does not exist.")
+    }
+        
+    if (!valor ){
+      res.statusCode = 422
+      throw new Error("'Valor' is required!")
+    }
+    if (!descricao){
+      res.statusCode = 422
+      throw new Error("'Descrição' is required!")
+    }
+
+    if (typeof valor !== "number"){
+      res.statusCode = 422
+      throw new Error("type invalid of 'valor'.")
+    }
+    if (typeof descricao !== "string"){
+      res.statusCode = 422
+      throw new Error("type invalid of 'descrição'.")
+    }
+
+    if (valor <= 0){
+      res.statusCode = 422
+      throw new Error("'valor' must be greater than 0.")
+    }
+
+    if (descricao.length < 6){
+      res.statusCode = 422
+      throw new Error("'descrição' need more than 6 letter.")
+    }
+
+    if (valor > saldo){
+      res.statusCode = 422
+      throw new Error("'valor' cant be more than 'saldo'.")
+    }
 
     const listaDeContas = clientList[idIndex].listaDeContasPagas
 
-    const saldoAtualizado = listaDeContas[listaDeContas.length-1].valor + valor
-  
+    const conta:PaidAcount = {
+        valor:valor,
+        descrição:descricao,
+        dataDePagamento:data
+    }
 
-  } catch (error) {
-    
+    listaDeContas.push(conta)
+
+    clientList[idIndex].saldo -= conta.valor
+
+    res.status(201).send({
+        message: "conta paga",
+        valor: conta,
+        saldo:clientList[idIndex].saldo.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })});
+
+} catch (error) {
+    res.send({message: error.message})
   }
-}
-)
+}) 
