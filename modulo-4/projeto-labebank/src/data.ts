@@ -22,9 +22,9 @@ export const clientList:ClientAcount[]=[
   saldo:0,
   listaDeContasPagas:[
     {
-      valor:50,
-      descrição:"mc donald",
-      dataDePagamento:"07/07/2022" 
+      valor:0,
+      descrição:"",
+      dataDePagamento:"" 
     }
   ] 
 }

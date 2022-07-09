@@ -56,6 +56,8 @@ app.post("/users",(req:Request,res:Response)=>{
 
     const CPFindex = clientList.findIndex(client => client.CPF === CPF)
 
+
+
     if (CPFindex === -1 && calculateYears(dataNascInvert) >= 18 && nome.length > 3){
       const client: ClientAcount = {
         id:clientList.length + 1,
@@ -78,10 +80,20 @@ app.post("/users",(req:Request,res:Response)=>{
         products: clientList,
       });
     }    
-    else
+    else if (nome.length <= 3){
+      res.statusCode = 422
+      throw new Error("'nome' must be longer than 3 characters'.")
+    }
 
-    res.statusCode = 422
-    throw new Error("client is not able to register.")
+    else if (CPFindex !== -1){
+      res.statusCode = 422
+      throw new Error("'CPF' alredy exist.")
+    }
+
+    else if (calculateYears((dataNascInvert)) < 18){
+      res.statusCode = 422
+      throw new Error("user must be over 18 years old.")
+    }
 
   } catch (error) {
     res.send({message: error.message})
@@ -142,11 +154,11 @@ app.put("/users/:id", (req:Request, res:Response)=>{
 
 
     res.status(201).send({
-        message: "credito feito com sucesso:",
+        message: "credit made successfully!",
         valor: credito.toLocaleString("pt-br", {
           style: "currency",
           currency: "BRL",
-        }) });
+        })});
 
 } catch (error) {
     res.send({message: error.message})
@@ -221,7 +233,8 @@ app.put("/users/:id/pay",(req:Request,res:Response)=>{
         saldo:clientList[idIndex].saldo.toLocaleString("pt-br", {
           style: "currency",
           currency: "BRL",
-        })});
+        }),
+       cliente:clientList[idIndex] });
 
 } catch (error) {
     res.send({message: error.message})
