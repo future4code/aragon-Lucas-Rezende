@@ -1,0 +1,90 @@
+USE `aragon-lucas-rezende`;
+
+SET SQL_SAFE_UPDATES = 0;
+
+-- exercício 1 --
+
+CREATE TABLE `Projetos` (
+  id VARCHAR(255) PRIMARY KEY,
+  name VARCHAR(255) UNIQUE,
+  title VARCHAR(255) NOT NULL,
+  vencimento DATE NOT NULL
+);
+
+DROP TABLE `Projetos`;
+
+-- exercicio 2 --
+
+INSERT INTO `Projetos`
+VALUES
+(001,"LabeSky","LSy","2023/10/05"),
+(002,"Labefy","LFy","2024/01/06"),
+(003,"AstroZoom","AZm","2022/12/20");
+
+SELECT * FROM `Projetos`;
+
+-- exercicio 3--
+
+-- letra A --
+
+ALTER TABLE `Projetos`
+DROP COLUMN title;
+
+DESCRIBE `Projetos`;
+
+-- letra B --
+
+ALTER TABLE `Projetos`
+CHANGE vencimento dueDate DATE NOT NULL;
+
+DESCRIBE `Projetos`;
+
+-- letra C --
+
+ALTER TABLE `Funcionários`
+MODIFY EMAIL VARCHAR(255) UNIQUE;
+
+ALTER TABLE `Funcionários`
+CHANGE EMAIL email VARCHAR(255) UNIQUE;
+
+DESCRIBE `Funcionários`;
+
+-- exercicio 4 --
+
+-- letra A --
+
+ALTER TABLE `Projetos`
+ADD description VARCHAR(255);
+
+DESCRIBE `Projetos`;
+
+-- letra B --
+
+UPDATE `Projetos`
+SET description = "Projeto de sistema em nuvem da Labenu." 
+WHERE id = 001;
+
+UPDATE `Projetos`
+SET description = "Projeto de sistema de gerenciamento de músicas da Labenu." 
+WHERE id = 002;
+
+UPDATE `Projetos`
+SET description = "Projeto de rede de comunicação da Labenu."
+WHERE id = 003;
+
+SELECT * FROM `Projetos`;
+
+-- exercicio 5 --
+
+-- letra A --
+
+SELECT *
+FROM `Projetos`
+ORDER BY dueDate DESC;
+
+-- letra B --
+
+SELECT *
+FROM `Projetos`
+ORDER BY dueDate ASC
+LIMIT 2;
