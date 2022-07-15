@@ -134,18 +134,18 @@ app.post("/tasks/:taskId/users", async (req:Request,res:Response) => {
     const taskId = Number(req.params.taskId)
     
     const [ tasks ] = await connection.raw(`
-    SELECT * FROM Responsibles
-    WHERE taskId = ${taskId};
+    SELECT * FROM Tasks
+    WHERE id = ${taskId};
     `)
   
     const taskFound = tasks[0]
   
-    if (taskFound) {
+    if (!taskFound) {
       errorCode = 404
       throw new Error("task already exist")
     }  
 
-    if (!taskFound) {
+    if (taskFound) {
       
       await connection.raw(`
       INSERT INTO Responsibles
