@@ -1,0 +1,28 @@
+### Ping
+GET http://localhost:3003/ping
+
+### Create perfume: this request create a new product if aleatory id.
+POST http://localhost:3003/perfumes
+Content-Type: application/json 
+
+{
+    "name": "Test product",
+    "brand": "ferrari",
+    "price": 499.99,
+    "ml":  50
+}
+
+### Search perfume by name or brand: this request return a list if all perfumes or filter by name or brand.
+GET http://localhost:3003/perfumes?perfume=&sort=price&order=asc
+
+
+### Put new price: this request update a perfume price informing its id.
+PUT http://localhost:3003/perfumes/1658248676754
+Content-Type: application/json 
+
+{
+    "price": 111.11
+}
+
+### Delete product: this request deletes the perfume informing its id
+DELETE http://localhost:3003/perfumes/1658248676754
