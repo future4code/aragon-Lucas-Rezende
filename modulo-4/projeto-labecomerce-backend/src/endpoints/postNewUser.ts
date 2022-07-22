@@ -5,16 +5,16 @@ import { TABLE_USERS } from "../database/tableNames";
 export const postNewUser = async (req: Request, res: Response) => {
     let errorCode = 400
     try {
-       const name = req.body.name
+       const email = req.body.email
 
-       const password = req.body.name
+       const password = req.body.password
 
        const id = Date.now()
 
        await connection.raw(`
        INSERT INTO ${TABLE_USERS}
-       (id,name,password)
-       VALUES ("${id}","${name}","${password}")
+       (id,email,password)
+       VALUES ("${id}","${email}","${password}")
        `)
 
     res.status(200).send({

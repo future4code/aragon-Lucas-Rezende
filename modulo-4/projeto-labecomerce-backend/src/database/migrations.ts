@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS ${TABLE_PURCHASES}(
     user_id VARCHAR(255) NOT NULL,
     product_id VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
-    total_price DECIMAL(6,2) NOT NULL,
+    total_price DECIMAL(6,2),
     FOREIGN KEY (user_id) REFERENCES ${TABLE_USERS}(id),
     FOREIGN KEY (product_id) REFERENCES ${TABLE_PRODUCTS}(id)
 );
