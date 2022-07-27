@@ -1,0 +1,41 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+
+### Endpoint post new user
+POST http://localhost:3003/users
+Content-Type: application/json 
+
+{
+    "email": "lucasmacedo@msn.com",
+    "password": "test123"
+}
+
+### Endpoint get users
+GET http://localhost:3003/users
+
+### Endpoint post new product
+POST http://localhost:3003/products
+Content-Type: application/json 
+
+{
+    "name": "tenis",
+    "price": 99.99
+}
+
+### Endpoint get products
+GET http://localhost:3003/products
+
+
+### Endpoint post purchase
+POST http://localhost:3003/purchases
+Content-Type: application/json 
+
+{
+    "user_id":"102",
+    "product_id":"201",
+    "quantity": 2    
+}
+
+### Endpoint get purchases
+GET http://localhost:3003/users/1658512381075/purchases
