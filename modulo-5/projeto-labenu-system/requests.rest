@@ -1,18 +1,37 @@
 ### Endpoint de teste
 GET http://localhost:3003/ping
 
-
-### get all students
-GET http://localhost:3003/students
+### get all class
+GET http://localhost:3003/classrooms
 
 ### creeate class
 
-### Exercício 3 - Create product
-POST http://localhost:3003/classroom
+POST http://localhost:3003/classrooms
 Content-Type: application/json
 
 {
     "name": "bill gates",
-    "students": ["lucas"],
-    "module": "MODULO_5"
+    "module": "5"
 }
+
+### change module classroom
+PUT http://localhost:3003/classrooms/101
+Content-Type: application/json 
+
+{
+    "module":"4"
+}
+
+### create student
+POST http://localhost:3003/students
+Content-Type: application/json
+
+{
+        "name": "lucas",
+        "email": "macedo@gmail.com",
+        "birthdate":"1990/04/26",
+        "classroom_id": "101"
+}
+
+### get all students
+GET http://localhost:3003/students

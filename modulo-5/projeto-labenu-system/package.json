@@ -1,16 +1,16 @@
 {
-  "name": "projeto-labe-system",
+  "name": "template-revisao-modulo4",
   "version": "1.0.0",
-  "description": "primeiro projeto do módulo 5",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node ./build/index.js",
     "build": "tsc",
     "dev": "ts-node-dev ./src/index.ts",
-    "migrations": "tsc && node ./build/database/migrations.js"
+    "migrations": "tsc && node ./build/database/migrations/Migrations.js"
   },
   "keywords": [],
-  "author": "lucas macedo",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.12",
