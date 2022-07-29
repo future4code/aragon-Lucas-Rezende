@@ -13,11 +13,11 @@ https://labe-system-macedo.herokuapp.com/
 
 ## 🚀 Começando
 
-para usar a API você pode acessar o link acima ou instalar em seu computador as dependeeencias e rodar localmente na sua máquina conforme descrito abaixo.
+para usar a API você pode acessar o link acima ou instalar em seu computador as dependencias e rodar localmente na sua máquina conforme descrito abaixo.
 
 ## 🔧 Instalação
 
-para instalar as deependências digite no terminal:
+para instalar as dependências digite no terminal:
 
 ```
 npm install 
@@ -26,10 +26,10 @@ npm install
 para rodar a API na porta 3003 digite:
 
 ```
-npm run dv
+npm run dev
 ```
 
-para obter os dados digite no navegador o link da requisição que está na documentação e para fazer requisiçôes como que criam ou alteram via body utilize o postman ou app similares.
+para obter os dados digite no navegador o link da requisição que está na documentação e para fazer requisiçôes que criam ou alteram via body utilize o postman ou app similares.
 
 
 ## 🛠️ Construído com
