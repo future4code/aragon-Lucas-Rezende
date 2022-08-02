@@ -1,0 +1,48 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### get all classrooms active
+GET http://localhost:3003/classrooms/active
+
+### creeate classroom
+
+POST http://localhost:3003/classrooms
+Content-Type: application/json
+
+{
+    "name": "steve jobs",
+    "module": "3"
+}
+
+### change module classroom
+PUT http://localhost:3003/classrooms/101/module
+Content-Type: application/json 
+
+{
+    "module":"6"
+}
+
+### create student
+POST http://localhost:3003/students
+Content-Type: application/json
+
+{
+        "name": "samuka",
+        "email": "samuka@email.com",
+        "birthdate":"1991/10/15",
+        "classroom_id": "101"
+}
+
+### get all students
+GET http://localhost:3003/students?name=
+
+### change student classroom
+PUT http://localhost:3003/students/1659040746915/classroom
+Content-Type: application/json 
+
+{
+    "classroom_id":"1659029924407"
+}
+
+### get all students classroom
+GET http://localhost:3003/students/101
