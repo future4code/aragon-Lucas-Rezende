@@ -1,0 +1,48 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "nickname": "lucas",
+    "email": "lucas@email.com",
+    "password": "lucas123"
+}
+
+### Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "lucas@email.com",
+    "password": "lucas123"
+}
+
+### Get all recipes
+GET http://localhost:3003/recipes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM2MmFiYWE0LTc2NGEtNDQ3MC1hYjA3LWI2NWIyZDQzZjVmZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NDQ5MDQsImV4cCI6MTY1OTYzMTMwNH0.ND4UIbMY6RZEhv2xMHyC_LBXz6ub9YAgBi6Bz3doA4k
+
+### Post new recipe
+POST http://localhost:3003/recipes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM2MmFiYWE0LTc2NGEtNDQ3MC1hYjA3LWI2NWIyZDQzZjVmZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NDQ5MDQsImV4cCI6MTY1OTYzMTMwNH0.ND4UIbMY6RZEhv2xMHyC_LBXz6ub9YAgBi6Bz3doA4k
+Content-Type: application/json
+
+{
+    "title": "lasanha",
+    "description": "lasanha com muito molho e carne"
+}
+
+### Edit user (protected)
+PUT http://localhost:3003/recipes/01456dec-788f-44d0-ad70-3cebe53036a2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiOWI3ZWU4LWFlNGItNGJkMS05YmQ2LWU3ZTIxNTk0Mzk5YiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1OTU0OTgxOSwiZXhwIjoxNjU5NjM2MjE5fQ.9FFfa_B1z0iMaNMH86i8A4N7GNwEdaR-91uac6XKO-4 
+Content-Type: application/json
+
+{
+    "title": "lasanha do garfield"
+}
+
+### Delete recipe
+DELETE  ttp://localhost:3003/recipes/01456dec-788f-44d0-ad70-3cebe53036a2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM2MmFiYWE0LTc2NGEtNDQ3MC1hYjA3LWI2NWIyZDQzZjVmZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTQyOTEsImV4cCI6MTY1OTY0MDY5MX0.pxOMYEhQqV3lOOpiWU6Cvd_lNGxVlf4aq-68mDxPPNg
