@@ -1,15 +1,19 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
+import { IDeleteUserInputDTO, IGetUsersInputDTO, ILogininputDTO, ISignupinputDTO } from "../models/User";
 
 export class UserController {
     public signup = async (req: Request, res: Response) => {
         try {
+
+          const input: ISignupinputDTO = {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+          }
+
             const userBusiness = new UserBusiness()
-            const response = await userBusiness.signup({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
-            })
+            const response = await userBusiness.signup(input)
 
             res.status(201).send(response)
         } catch (error) {
@@ -19,11 +23,14 @@ export class UserController {
 
     public login = async (req: Request, res: Response) => {
         try {
+
+           const input: ILogininputDTO = {
+            email: req.body.email,
+            password: req.body.password
+           }
+
             const userBusiness = new UserBusiness()
-            const response = await userBusiness.login({
-                email: req.body.email,
-                password: req.body.password
-            })
+            const response = await userBusiness.login(input)
 
             res.status(200).send(response)
         } catch (error) {
@@ -33,15 +40,18 @@ export class UserController {
 
     public getUsers = async (req: Request, res: Response) => {
         try {
+
+          const input: IGetUsersInputDTO = {
+            token: req.headers.authorization,
+            search: req.query.search as string,
+            order: req.query.order as string,
+            sort: req.query.sort as string,
+            limit: req.query.limit as string,
+            page: req.query.page as string
+          }
+
             const userBusiness = new UserBusiness()
-            const response = await userBusiness.getUsers({
-                token: req.headers.authorization,
-                search: req.query.search,
-                order: req.query.order,
-                sort: req.query.sort,
-                limit: req.query.limit,
-                page: req.query.page
-            })
+            const response = await userBusiness.getUsers(input)
 
             res.status(200).send(response)
         } catch (error) {
@@ -51,11 +61,14 @@ export class UserController {
 
     public deleteUser = async (req: Request, res: Response) => {
         try {
-            const userBusiness = new UserBusiness()
-            const response = await userBusiness.deleteUser({
-                token: req.headers.authorization,
-                idToDelete: req.params.id
-            })
+            
+          const input: IDeleteUserInputDTO = {
+            token: req.headers.authorization,
+            idToDelete: req.params.id
+          }
+
+          const userBusiness = new UserBusiness()
+            const response = await userBusiness.deleteUser(input)
 
             res.status(200).send(response)
         } catch (error) {

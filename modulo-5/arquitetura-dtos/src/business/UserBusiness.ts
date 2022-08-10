@@ -1,11 +1,11 @@
 import { UserDatabase } from "../database/UserDatabase"
-import { User, USER_ROLES } from "../models/User"
+import { IDeleteUserInputDTO, IGetUsersDBDTO, IGetUsersInputDTO, IGetUsersOutputDTO, IGetUsersUser, ILogininputDTO, ISignupinputDTO, User, USER_ROLES } from "../models/User"
 import { Authenticator, ITokenPayload } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class UserBusiness {
-    public signup = async (input: any) => {
+    public signup = async (input: ISignupinputDTO) => {
         const name = input.name
         const email = input.email
         const password = input.password
@@ -69,7 +69,7 @@ export class UserBusiness {
         return response
     }
 
-    public login = async (input: any) => {
+    public login = async (input: ILogininputDTO) => {
         const email = input.email
         const password = input.password
 
@@ -127,7 +127,7 @@ export class UserBusiness {
         return response
     }
 
-    public getUsers = async (input: any) => {
+    public getUsers = async (input: IGetUsersInputDTO) => {
         const token = input.token
         const search = input.search || ""
         const order = input.order || "name"
@@ -143,14 +143,16 @@ export class UserBusiness {
             throw new Error("Token inválido ou faltando")
         }
 
-        const userDatabase = new UserDatabase()
-        const usersDB = await userDatabase.getUsers({
+        const getUsersInputDB: IGetUsersDBDTO = ({
             search,
             order,
             sort,
             limit,
             offset
         })
+
+        const userDataBase = new UserDatabase()
+        const usersDB = await userDataBase.getUsers(getUsersInputDB)
 
         const users = usersDB.map(userDB => {
             const user = new User(
@@ -161,7 +163,7 @@ export class UserBusiness {
                 userDB.role
             )
 
-            const userResponse = {
+            const userResponse: IGetUsersUser= {
                 id: user.getId(),
                 name: user.getName(),
                 email: user.getEmail()
@@ -170,14 +172,14 @@ export class UserBusiness {
             return userResponse
         })
 
-        const response = {
+        const response: IGetUsersOutputDTO = {
             users
         }
 
         return response
     }
 
-    public deleteUser = async (input: any) => {
+    public deleteUser = async (input: IDeleteUserInputDTO) => {
         const token = input.token
         const idToDelete = input.idToDelete
 

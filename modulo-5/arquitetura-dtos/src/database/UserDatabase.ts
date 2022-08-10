@@ -1,4 +1,4 @@
-import { IUserDB, User } from "../models/User"
+import { IGetUsersDBDTO, IUserDB, User } from "../models/User"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class UserDatabase extends BaseDatabase {
@@ -27,7 +27,7 @@ export class UserDatabase extends BaseDatabase {
             .insert(userDB)
     }
 
-    public getUsers = async (input: any) => {
+    public getUsers = async (input: IGetUsersDBDTO) => {
         const search = input.search
         const order = input.order
         const sort = input.sort
