@@ -1,0 +1,34 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "macedo",
+    "email": "macedo@gmail.com",
+    "password": "lucas123"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "macedo@gmail.com",
+    "password": "lucas123"
+}
+
+### Create new post
+POST http://localhost:3003/posts/6c178b9e-1584-47bf-a19f-4ea591cb5285
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjMTc4YjllLTE1ODQtNDdiZi1hMTlmLTRlYTU5MWNiNTI4NSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyMzc4NjAsImV4cCI6MTY2MDMyNDI2MH0.2biKcWRIdrUv0OT_rF1BUspk15mVD3UyVaHg6hUFTHg
+Content-Type: application/json
+
+{
+    "content": "olá mundo!"
+}
+
+### 3) Get all posts
+GET http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjMTc4YjllLTE1ODQtNDdiZi1hMTlmLTRlYTU5MWNiNTI4NSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyMzc4NjAsImV4cCI6MTY2MDMyNDI2MH0.2biKcWRIdrUv0OT_rF1BUspk15mVD3UyVaHg6hUFTHg
