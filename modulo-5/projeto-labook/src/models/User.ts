@@ -72,7 +72,10 @@ export class User {
         this.role = newRole
     }
 
-    
 }
 
+export interface IDeleteUserInputDTO {
+  token: string,
+  idToDelete: string
+}
 

@@ -1,6 +1,7 @@
 
-import { IUserDB, User } from "../models/User"
+import { IDeleteUserInputDTO, IUserDB, User } from "../models/User"
 import { BaseDatabase } from "./BaseDatabase"
+import { PostDatabase } from "./PostDatabase"
 
 export class UserDatabase extends BaseDatabase {
     public static TABLE_USERS = "Labook_Users"
@@ -28,4 +29,25 @@ export class UserDatabase extends BaseDatabase {
       .insert(userDB)
 
 }
+public deletePost = async (id: string) => {
+  await BaseDatabase
+      .connection(PostDatabase.TABLE_LIKES)
+      .delete()
+      .where({ user_id:id })
+
+      await BaseDatabase
+      .connection(PostDatabase.TABLE_POSTS)
+      .delete()
+      .where({ user_id:id })
+}
+
+public findById = async (id: string) => {
+  const usersDB: IUserDB[] = await BaseDatabase
+      .connection(UserDatabase.TABLE_USERS)
+      .select()
+      .where({ id })
+
+  return usersDB[0]
+}
+
 }

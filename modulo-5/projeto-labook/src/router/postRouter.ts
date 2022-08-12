@@ -19,3 +19,5 @@ new Authenticator()
 postRouter.post("/:userId", postController.createNewPost)
 
 postRouter.get("/", postController.getAllPosts)
+
+postRouter.post("/:postId", postController.postLike)

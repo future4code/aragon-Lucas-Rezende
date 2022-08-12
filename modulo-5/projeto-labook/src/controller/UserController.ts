@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { ILoginInputDTO, ISignupInputDTO } from "../models/User";
+import { IDeleteUserInputDTO, ILoginInputDTO, ISignupInputDTO } from "../models/User";
 
 export class UserController {
     constructor(
@@ -37,4 +37,7 @@ export class UserController {
         res.status(400).send({ message: error.message })
     }
 }
+
+
+
 }

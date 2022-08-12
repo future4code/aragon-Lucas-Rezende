@@ -19,3 +19,5 @@ new Authenticator()
 userRouter.post("/signup", userController.signup)
 
 userRouter.post("/login", userController.login)
+
+userRouter.delete("/:idToDelete", userController.deleteUser)

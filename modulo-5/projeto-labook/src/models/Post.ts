@@ -65,3 +65,16 @@ export interface IGetPostsPost {
 export interface IGetPostsOutputDTO {
   users: IGetPostsPost[]
 }
+
+export interface IPostOutPutDTO{
+  userId:string,
+  postId:string,
+  content:string,
+  email:string,
+  likes:number
+}
+
+export interface ICreateLikeInputDTO {
+  token: string,
+  postId:string
+}

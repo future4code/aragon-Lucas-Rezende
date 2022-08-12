@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PostBusiness } from "../business/PostBusiness";
-import { IPostInputDTO } from "../models/Post";
+import { ICreateLikeInputDTO, IPostInputDTO } from "../models/Post";
 
 export class PostController {
     constructor(
@@ -37,4 +37,19 @@ export class PostController {
       res.status(400).send({ message: error.message })
   }
 }
+
+public postLike = async (req: Request, res: Response) => {
+  try {
+      const input: ICreateLikeInputDTO = {
+          token: req.headers.authorization,
+          postId: req.params.postId
+      }
+
+      const response = await this.postBusiness.postLike(input)
+
+      res.status(200).send(response)
+  } catch (error) {
+      res.status(400).send({ message: error.message })
   }
+}
+} 
