@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { IDeleteUserInputDTO, ILoginInputDTO, ISignupInputDTO } from "../models/User";
+import { ILoginInputDTO, ISignupInputDTO } from "../models/User";
 
 export class UserController {
     constructor(

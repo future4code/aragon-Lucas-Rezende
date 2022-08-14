@@ -1,5 +1,5 @@
 import { PostDatabase } from "../database/PostDatabase"
-import { ICreateLikeInputDTO, IGetPostsOutputDTO, IGetPostsPost, IPostInputDTO, IPostOutPutDTO, Post } from "../models/Post"
+import { ICreateLikeInputDTO, IDeletePostInputDTO, IGetPostsOutputDTO, IGetPostsPost, IPostInputDTO, IPostOutPutDTO, IRemoveLikeInputDTO, Post } from "../models/Post"
 import { USER_ROLES } from "../models/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
@@ -100,14 +100,11 @@ export class PostBusiness {
 
 public postLike = async (input: ICreateLikeInputDTO) => {
   
-  const {token, postId} = input
-
-  if (!token) {
-      throw new Error("Token faltando")
-  }
-
+  const token = input.token
+  const postId = input.postId
 
   const payload = this.authenticator.getTokenPayload(token)
+
 
   if (!payload) {
       throw new Error("Token inválido")
@@ -125,24 +122,94 @@ public postLike = async (input: ICreateLikeInputDTO) => {
 
  const postLikeDB = await this.postDatabase.findLikeById(postId)
 
-  if (postLikeDB.user_id === postLikeDB.post_id) {
+
+  if (postLikeDB.user_id === payload.id) {
           throw new Error("Usuário não pode curtir mais de uma vez o mesmo post")
 
   }
 
+  const id = this.idGenerator.generate()
+
   const like = {
-     id:postLikeDB.id,
-     post_id:postLikeDB.post_id,
-     user_id:postLikeDB.user_id
+     id:id,
+     post_id:postId,
+     user_id:payload.id
   }
 
 
   await this.postDatabase.postLike(like)
 
   const response = {
-      message: "curtiu"
+      message: "like"
   }
 
   return response
 }
+
+public deletePost = async (input: IDeletePostInputDTO) => {
+  const token = input.token
+  const idToDelete = input.idToDelete
+
+  const payload = this.authenticator.getTokenPayload(token)
+
+  const postDB = await this.postDatabase.findById(idToDelete)
+
+
+  if (!postDB) {
+    throw new Error("post não encontrado")
+  }
+
+
+  if (!payload) {
+      throw new Error("Token inválido ou faltando")
+  }
+
+  if (payload.role === USER_ROLES.NORMAL) {
+    if (postDB.user_id !== payload.id)
+      throw new Error("Apenas admins podem deletar podtd de outro usuário")
+  }
+
+
+  await this.postDatabase.deletePost(idToDelete)
+
+  const response = {
+      message: "post deletado com sucesso"
+  }
+
+  return response
+}
+
+
+public removeLike = async (input: IRemoveLikeInputDTO) => {
+  const token = input.token
+  const postId = input.postId
+
+  const payload = this.authenticator.getTokenPayload(token)
+
+  const postDB = await this.postDatabase.findById(postId)
+
+  const postLikeDB = await this.postDatabase.findLikeById(postId)
+
+  if (!postDB) {
+    throw new Error("post não encontrado")
+  }
+
+
+  if (!payload) {
+      throw new Error("Token inválido ou faltando")
+  }
+
+  if (postLikeDB.user_id !== payload.id) {
+    throw new Error("esse post não foi curtido por você")
+  }
+
+  await this.postDatabase.removeLike(postId, payload.id)
+
+  const response = {
+      message: "like removido"
+  }
+
+  return response
+}
+
 } 

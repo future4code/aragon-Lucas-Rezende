@@ -78,3 +78,14 @@ export interface ICreateLikeInputDTO {
   token: string,
   postId:string
 }
+
+export interface IDeletePostInputDTO {
+  token: string,
+  idToDelete: string
+}
+
+export interface IRemoveLikeInputDTO {
+  token: string,
+  postId:string
+}
+

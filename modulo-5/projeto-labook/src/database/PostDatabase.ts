@@ -29,9 +29,9 @@ export class PostDatabase extends BaseDatabase {
         ${UserDatabase.TABLE_USERS}.email,
         COUNT (${PostDatabase.TABLE_LIKES}.id) AS likes
         FROM ${PostDatabase.TABLE_POSTS}
-        JOIN ${UserDatabase.TABLE_USERS}
+        LEFT JOIN ${UserDatabase.TABLE_USERS}
         ON ${PostDatabase.TABLE_POSTS}.user_id = ${UserDatabase.TABLE_USERS}.id
-        JOIN ${PostDatabase.TABLE_LIKES}
+        LEFT JOIN ${PostDatabase.TABLE_LIKES}
         ON ${PostDatabase.TABLE_LIKES}.post_id = ${PostDatabase.TABLE_POSTS}.id
         GROUP BY postId, userId;
         `)
@@ -53,7 +53,7 @@ public findLikeById = async (id: string) => {
   const postsDB: ILikeDB[] = await BaseDatabase
       .connection(PostDatabase.TABLE_LIKES)
       .select()
-      .where({ id })
+      .where({ post_id: id })
 
   return postsDB[0]
 }
@@ -67,20 +67,27 @@ public postLike = async (like: ILikeDB) => {
 
   await BaseDatabase
       .connection(PostDatabase.TABLE_LIKES)
-      .update(likeDB)
-      .where({ id: likeDB.post_id })
+      .insert(likeDB)
 }
 
 public deletePost = async (id: string) => {
   await BaseDatabase
       .connection(PostDatabase.TABLE_LIKES)
       .delete()
-      .where({ user_id:id })
+      .where({ post_id:id })
 
       await BaseDatabase
       .connection(PostDatabase.TABLE_POSTS)
       .delete()
       .where({ user_id:id })
+}
+
+public removeLike = async (postId:string, userId:string) => {
+    await BaseDatabase
+    .connection(PostDatabase.TABLE_LIKES)
+    .delete()
+    .where("post_id", "=", `${postId}`)
+    .andWhere("user_id", "=", `${userId}`)
 }
 
 } 

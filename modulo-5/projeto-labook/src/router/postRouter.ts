@@ -20,4 +20,8 @@ postRouter.post("/:userId", postController.createNewPost)
 
 postRouter.get("/", postController.getAllPosts)
 
-postRouter.post("/:postId", postController.postLike)
+postRouter.delete("/:idToDelete", postController.deletePost)
+
+postRouter.post("/like/:postId", postController.postLike)
+
+postRouter.delete("/like/:postId", postController.removeLike)

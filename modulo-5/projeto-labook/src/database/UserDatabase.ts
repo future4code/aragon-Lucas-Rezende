@@ -29,17 +29,6 @@ export class UserDatabase extends BaseDatabase {
       .insert(userDB)
 
 }
-public deletePost = async (id: string) => {
-  await BaseDatabase
-      .connection(PostDatabase.TABLE_LIKES)
-      .delete()
-      .where({ user_id:id })
-
-      await BaseDatabase
-      .connection(PostDatabase.TABLE_POSTS)
-      .delete()
-      .where({ user_id:id })
-}
 
 public findById = async (id: string) => {
   const usersDB: IUserDB[] = await BaseDatabase
