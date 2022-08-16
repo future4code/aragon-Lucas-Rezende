@@ -1,0 +1,54 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "nickname": "lucas",
+    "email": "lucas@email.com",
+    "password": "lucas123"
+}
+
+### Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "astrodev@gmail.com",
+    "password": "bananinha"
+}
+
+### Get all recipes
+GET http://localhost:3003/recipes?r=las&limit=4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDMyYmM0LWY4ODAtNDIyNi04NDIxLWE5N2QyZGNiNjUxYyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDEwNzcsImV4cCI6MTY1OTcyNzQ3N30.mCajSA1emhcrb8-65281kxNjSuxQjCpuk3dFF1T_Cyw
+
+
+### Post new recipe
+POST http://localhost:3003/recipes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDMyYmM0LWY4ODAtNDIyNi04NDIxLWE5N2QyZGNiNjUxYyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDEwNzcsImV4cCI6MTY1OTcyNzQ3N30.mCajSA1emhcrb8-65281kxNjSuxQjCpuk3dFF1T_Cyw
+Content-Type: application/json
+
+{
+    "title": "lasanha",
+    "description": "lasanha com muito molho e carne"
+}
+
+### Edit recipe
+PUT http://localhost:3003/recipes/01456dec-788f-44d0-ad70-3cebe53036a2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDMyYmM0LWY4ODAtNDIyNi04NDIxLWE5N2QyZGNiNjUxYyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDEwNzcsImV4cCI6MTY1OTcyNzQ3N30.mCajSA1emhcrb8-65281kxNjSuxQjCpuk3dFF1T_Cyw
+Content-Type: application/json
+
+
+### Delete recipe
+DELETE  http://localhost:3003/recipes/6101dad5-9640-4b0c-b808-60fc5af44794
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDMyYmM0LWY4ODAtNDIyNi04NDIxLWE5N2QyZGNiNjUxYyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDEwNzcsImV4cCI6MTY1OTcyNzQ3N30.mCajSA1emhcrb8-65281kxNjSuxQjCpuk3dFF1T_Cyw
+
+### Delete user
+DELETE  http://localhost:3003/users/26d32bc4-f880-4226-8421-a97d2dcb651c
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiOWI3ZWU4LWFlNGItNGJkMS05YmQ2LWU3ZTIxNTk0Mzk5YiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1OTY0MTE5MywiZXhwIjoxNjU5NzI3NTkzfQ.vxhjB9UWWn8c7OCIysTC5x3mJUBrmifXVV6KvMgq2tU
+
+### Get all users
+GET http://localhost:3003/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDMyYmM0LWY4ODAtNDIyNi04NDIxLWE5N2QyZGNiNjUxYyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDEwNzcsImV4cCI6MTY1OTcyNzQ3N30.mCajSA1emhcrb8-65281kxNjSuxQjCpuk3dFF1T_Cyw
