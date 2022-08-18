@@ -27,6 +27,14 @@ export class UserDatabaseMock extends BaseDatabase {
                   password: "$2a$12$RBAWOHpUvGTE.MEeIohAzec9tlVqtNA/x2PMPt/Hrt0vI437cQdJC", // bananinha
                   role: USER_ROLES.ADMIN
               } as IUserDB
+              case "fulano@gmail.com":
+                return {
+                id: "102",
+                name: "Fulano",
+                email: "fulano@gmail.com",
+                password: "$2a$12$PULtVNlAll87D6E8pR/0HO9vbzVDPaUMA89rc5cNmYoAAepbwmkcO", // qwerty00
+                role: USER_ROLES.NORMAL
+            } as IUserDB
           default:
               return undefined
       }

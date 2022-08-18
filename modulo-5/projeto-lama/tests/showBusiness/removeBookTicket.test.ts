@@ -5,7 +5,7 @@ import { HashManagerMock } from "../mocks/services/HashManagerMock"
 import { AuthenticatorMock } from "../mocks/services/AuthenticatorMock"
 import { BaseError } from "../../src/errors/BaseError"
 import { ShowDatabase } from "../../src/database/ShowDatabase"
-import { ICreateShowInputDTO } from "../../src/models/Show"
+import { IBookTicketInputDTO, ICreateShowInputDTO, IRemoveLBookTicketInputDTO } from "../../src/models/Show"
 
 describe("testing ShowBusiness", () => {
     const showBusiness = new ShowBusiness(
@@ -15,18 +15,17 @@ describe("testing ShowBusiness", () => {
         new AuthenticatorMock()
     )
 
-    test("create show successful", async () => {
-        const input: ICreateShowInputDTO = {
-            token: "token-astrodev",
-            band: "system of down",
-            starts_at: "2022/10/11"
-        }
+    test("remove book ticket show successful", async () => {
+      const input: IRemoveLBookTicketInputDTO = {
+        token: "token-astrodev",
+        showId: "201"
+    }
 
-        const response = await showBusiness.createShow(input)
 
-        expect(response.message).toEqual("show created successfully")
-        expect(response.show.getId()).toEqual("id-mock")
-        expect(response.show.getBand()).toEqual("system of down")
+        const response = await showBusiness.removeBookTicket(input)
+
+        expect(response.message).toEqual("ticket removed successfully")
+
     })
 
   }) 

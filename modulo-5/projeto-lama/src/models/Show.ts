@@ -69,3 +69,21 @@ export interface IGetPostsInputDTO {
 export interface IGetShowsOutputDTO {
   shows: Show[]
 }
+
+export interface IBookTicketInputDTO {
+  token: string,
+  showId: string
+}
+
+export interface IBookTicketOutputDTO {
+  message: string
+}
+
+export interface IRemoveLBookTicketInputDTO {
+  token: string,
+  showId: string
+}
+
+export interface IRemoveeBookTicketOutputDTO {
+  message: string
+}

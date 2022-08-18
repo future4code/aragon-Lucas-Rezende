@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ShowBusiness } from "../business/ShowBusiness";
 import { BaseError } from "../errors/BaseError";
-import { ICreateShowInputDTO, IGetPostsInputDTO } from "../models/Show";
+import { IBookTicketInputDTO, ICreateShowInputDTO, IGetPostsInputDTO, IRemoveLBookTicketInputDTO } from "../models/Show";
 
 export class ShowController {
     constructor(
@@ -12,7 +12,7 @@ export class ShowController {
       try {
           const input: ICreateShowInputDTO = {
               token: req.headers.authorization,
-              band: req.body.content,
+              band: req.body.band,
               starts_at: req.body.starts_at
           }
 
@@ -23,7 +23,7 @@ export class ShowController {
               return res.status(error.statusCode).send({ message: error.message })
           }
 
-          res.status(500).send({ message: "Erro inesperado ao criar post" })
+          res.status(500).send({ message: "unexpected error creating show" })
       }
   }
 
@@ -36,8 +36,43 @@ export class ShowController {
             return res.status(error.statusCode).send({ message: error.message })
         }
 
-        res.status(500).send({ message: "Erro inesperado ao buscar posts" })
+        res.status(500).send({ message: "unexpected error searching shows" })
     }
 }
 
+public bookTickets = async (req: Request, res: Response) => {
+  try {
+      const input: IBookTicketInputDTO = {
+          token: req.headers.authorization,
+          showId: req.params.showId
+      }
+
+      const response = await this.showBusiness.bookTicket(input)
+      res.status(200).send(response)
+  } catch (error: unknown) {
+      if (error instanceof BaseError) {
+          return res.status(error.statusCode).send({ message: error.message })
+      }
+
+      res.status(500).send({ message: "unexpected error booking tickets" })
+  }
 }
+
+public removeBookTicket = async (req: Request, res: Response) => {
+  try {
+      const input: IRemoveLBookTicketInputDTO = {
+          token: req.headers.authorization,
+          showId: req.params.showId
+      }
+
+      const response = await this.showBusiness.removeBookTicket(input)
+      res.status(200).send(response)
+  } catch (error: unknown) {
+      if (error instanceof BaseError) {
+          return res.status(error.statusCode).send({ message: error.message })
+      }
+
+      res.status(500).send({ message: "unexpected error remove booking tickets" })
+  }
+}
+} 

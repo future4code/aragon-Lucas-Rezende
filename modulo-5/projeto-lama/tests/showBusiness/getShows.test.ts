@@ -7,7 +7,7 @@ import { BaseError } from "../../src/errors/BaseError"
 import { ShowDatabase } from "../../src/database/ShowDatabase"
 import { ICreateShowInputDTO } from "../../src/models/Show"
 
-describe("testing ShowBusiness", () => {
+describe("Testando ShowBusiness", () => {
     const showBusiness = new ShowBusiness(
         new ShowDatabaseMock() as unknown as ShowDatabase,
         new IdGeneratorMock(),
@@ -15,18 +15,12 @@ describe("testing ShowBusiness", () => {
         new AuthenticatorMock()
     )
 
-    test("create show successful", async () => {
-        const input: ICreateShowInputDTO = {
-            token: "token-astrodev",
-            band: "system of down",
-            starts_at: "2022/10/11"
-        }
+    test("get shows successful", async () => {
 
-        const response = await showBusiness.createShow(input)
 
-        expect(response.message).toEqual("show created successfully")
-        expect(response.show.getId()).toEqual("id-mock")
-        expect(response.show.getBand()).toEqual("system of down")
+        const response = await showBusiness.getShows()
+
+        expect(response.shows.length).toEqual(3)
     })
 
   }) 
