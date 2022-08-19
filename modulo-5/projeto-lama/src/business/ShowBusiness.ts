@@ -36,10 +36,8 @@ export class ShowBusiness {
       throw new UnauthorizedError("only admins can create shows");
     }
 
-    if (starts_at >= "2022/12/04") {
-      throw new UnauthorizedError(
-        "the date of the show cannot be earlier than the start of the festival"
-      );
+    if (starts_at < "2022/12/05") {
+      throw new RequestError("the date of the show cannot be earlier than the start of the festival");
     }
 
     const showDB = await this.showDatabase.findBandByDate(starts_at);
