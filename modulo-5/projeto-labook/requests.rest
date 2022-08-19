@@ -1,0 +1,47 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "macedo",
+    "email": "macedo@gmail.com",
+    "password": "lucas123"
+}
+
+### Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "fulano@gmail.com",
+    "password": "qwerty00"
+}
+
+### Create new post
+POST http://localhost:3003/posts/6c178b9e-1584-47bf-a19f-4ea591cb5285
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA1MDIwOTIsImV4cCI6MTY2MDU4ODQ5Mn0.1J9RwxHpftvobo1q3Keomls2mQvH0hjSc262KLvdDTM
+Content-Type: application/json
+
+{
+    "content": "olá meu povo!"
+}
+
+### Get all posts
+GET http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDQ5NDc1MiwiZXhwIjoxNjYwNTgxMTUyfQ.taQ3UmOwRLPCKVbi6xkrdDM7zL7IjCOM9Eq-iattgzk
+
+### Delete post
+DELETE http://localhost:3003/posts/202
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDQ5NDc1MiwiZXhwIjoxNjYwNTgxMTUyfQ.taQ3UmOwRLPCKVbi6xkrdDM7zL7IjCOM9Eq-iattgzk
+
+
+### Post like
+POST http://localhost:3003/posts/like/203
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA0OTk4MzEsImV4cCI6MTY2MDU4NjIzMX0.2PJzWn98K1i1HZjTMqp8_VqGZBWZI6HvuhiXnrNChF4
+
+### Remove like
+DELETE http://localhost:3003/posts/like/203
+Authorization:    
