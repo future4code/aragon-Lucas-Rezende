@@ -1,0 +1,63 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "lucas",
+    "email": "lucas@email.com",
+    "password": "lucas123"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "bananinha"
+} 
+
+### 3) Create competition
+POST http://localhost:3003/competitions/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJkNjI5ZTcxLTFhNjYtNDlmMC04N2NiLWYxMjVhOWRlNjg2ZiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MjQwNDg1NiwiZXhwIjoxNjYyNDkxMjU2fQ.av5BAcyLajohiF-1WO2NHZStSheVky5IHjjRt48qXC0
+Content-Type: application/json
+
+{
+    "competition": "100m",
+    "stage":"classificação 2"
+}
+
+
+### 4) Create result
+POST http://localhost:3003/results/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZiZDYwYjY2LWNiZTctNDVmMC1hNDY3LThkODNkN2JhM2U3NCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MjY0NDMyMSwiZXhwIjoxNjYyNzMwNzIxfQ.pxssjjthguiBjKBfVLgH0Vn66qXbKj6BsjJMfKhcroA
+Content-Type: application/json
+
+{
+  "user_id": "111",
+  "competition_id": "202",
+  "value": 86.10,
+  "unit": "m"
+}
+
+### 5) finish competition
+PUT http://localhost:3003/competitions/201/finish
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZiZDYwYjY2LWNiZTctNDVmMC1hNDY3LThkODNkN2JhM2U3NCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MjY0NDMyMSwiZXhwIjoxNjYyNzMwNzIxfQ.pxssjjthguiBjKBfVLgH0Vn66qXbKj6BsjJMfKhcroA
+Content-Type: application/json
+
+{
+            "status": "DONE"
+}
+
+
+### 6) Get results
+GET http://localhost:3003/results/202
+   
+### 7) Get parcial results
+GET http://localhost:3003/results/partial/202
+
+### 8) Get atletas
+GET http://localhost:3003/users
